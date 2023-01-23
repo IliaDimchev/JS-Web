@@ -9,8 +9,8 @@ const homeController = require('./controllers/homeController');
 // const router = Router();
 
 router.get('/', homeController.getHomePage);
-
 router.get('/about', homeController.getAboutPage);
+router.get('404', homeController.getErrorPage);
 
 // router.get('/create', (req, res) => {
 //     res.render('create');
@@ -19,8 +19,6 @@ router.get('/create', cubeController.getCreateCube);
 router.post('/create', cubeController.postCreateCube);
 router.get('/details/:cubeId', cubeController.getCubeDetails);
 
-router.get('*', (req, res) => {
-    res.render('404');
-})
+router.get('*', homeController.getErrorPage);
 
 module.exports = router;

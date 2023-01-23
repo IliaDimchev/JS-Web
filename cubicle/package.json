@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
     "uniqid": "^5.0.3"
   },
@@ -14,7 +14,7 @@
     "nodemon": "^2.0.20"
   },
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "SET node_env=production&&node ./src/index.js",
     "dev": "nodemon ./src/index.js"
   },
   "keywords": [],

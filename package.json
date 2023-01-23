@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "express-handlebars": "^6.0.6"
   }
 }

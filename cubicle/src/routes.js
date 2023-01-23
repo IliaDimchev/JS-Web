@@ -16,6 +16,7 @@ router.get('/about', homeController.getAboutPage);
 //     res.render('create');
 // })
 router.get('/create', cubeController.getCreateCube);
+router.post('/create', cubeController.postCreateCube);
 
 router.get('*', (req, res) => {
     res.render('404');

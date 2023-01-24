@@ -24,7 +24,7 @@
     {
       "id": 4,
       "name": "Megaminx",
-      "description": "",
+      "description": "The Megaminx, previously called as Hungarian Supernova was patented by Uwe Mèffert. It is a dodecahedron-shaped face-turning twisty puzzle which is very similar to the classic Rubik’s Cube. The solution is almost the same, just a few new algorithms come in when you reach the last layer, so if you’re familiar with the classic 3x3x3 Cube then you won't have problems solving the Megaminx either.",
       "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/61HpQqVQ37L._SY355_.jpg",
       "difficultyLevel": "3"
     },

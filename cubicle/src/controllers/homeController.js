@@ -4,7 +4,7 @@ const Cube = require('../models/Cube');
 exports.getHomePage = async (req, res) => {
     const { search, from: difficultyFrom, to: difficultyTo } = req.query;
 
-    let cubes = await Cube.find();
+    let cubes = await Cube.find().lean();
 
     // Use DB Filtration insted of in-memory filtering
     if (search) {

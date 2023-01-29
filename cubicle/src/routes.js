@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const cubeController = require('./controllers/cubeController');
 const homeController = require('./controllers/homeController');
+const accessoryController = require('./controllers/accessoryController');
 
 // Explicitly
 // const express = require('express');
@@ -18,6 +19,8 @@ router.get('/404', homeController.getErrorPage);
 router.get('/create', cubeController.getCreateCube);
 router.post('/create', cubeController.postCreateCube);
 router.get('/details/:cubeId', cubeController.getCubeDetails);
+
+router.use('/accessory', accessoryController);
 
 router.get('*', homeController.getErrorPage);
 

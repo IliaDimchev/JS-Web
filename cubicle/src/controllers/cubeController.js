@@ -16,9 +16,9 @@ exports.postCreateCube = async (req, res) => {
 };
 
 exports.getCubeDetails = async (req, res) => {
-    let cube = await Cube.findById(req.params.cubeId).lean();
+    const cube = await Cube.findById(req.params.cubeId).lean();
     if (!cube) {
-        return res.redirect('404');
+        return res.redirect('/404');
     }
 
     res.render('details', { cube });

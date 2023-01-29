@@ -1,33 +1,6 @@
-const mongoose = require('mongoose');
-
-const cubeSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-        maxLength: 50,
-    },
-    imageUrl: {
-        type: String,
-        required: true,
-        // Add Http/https validation
-    },
-    difficultyLevel: {
-        type: Number,
-        mxa: 6,
-        min: 1,
-    }
-});
-
-// Short-Way 
-// const { Schema } = require('mongoose');
-// const cubeSchema = new Schema;
-
-
-
+const fs = require('fs');
+const db = require('../db.json');
+const path = require('path');
 
 class Cube {
     constructor({name, description, imageUrl, difficultyLevel}) {

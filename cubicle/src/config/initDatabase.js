@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const uri = 'mongodb://127.0.0.1:27017/cubicle'
+const config = require('./index');
 
 async function initDatabase() {
     mongoose.set('strictQuery', false);
-    await mongoose.connect(uri);
+    await mongoose.connect(config.DB_URI);
 
     console.log('DB Connected');
 }

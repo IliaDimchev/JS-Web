@@ -16,13 +16,13 @@ exports.postCreateCube = async (req, res) => {
 };
 
 exports.getCubeDetails = (req, res) => {
-    let cubeId = Number(req.params.cubeId);
+    let cubeId = req.params.cubeId;
 
     if (!cubeId){
         return res.redirect('404');
     }
 
-    let cube = db.cubes.find(x => x.id === cubeId);
+    let cube = Cube.find(x => x._id === cubeId);
 
     if (!cube) {
         return res.redirect('404');

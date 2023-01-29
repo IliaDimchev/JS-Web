@@ -8,6 +8,7 @@ const server = http.createServer((req, res) => {
     
     switch (req.url) {
         case '/':
+            console.log(`${[]?}`)
             res.write('home view')
             break;
         case '/catalog':

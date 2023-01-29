@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const mongoose = require('mongoose');
+
 const Accessory = require('../models/Accessory');
 
 router.get('/create', (req, res) => {

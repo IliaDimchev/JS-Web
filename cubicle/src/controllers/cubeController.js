@@ -15,15 +15,8 @@ exports.postCreateCube = async (req, res) => {
     res.redirect('/');
 };
 
-exports.getCubeDetails = (req, res) => {
-    let cubeId = req.params.cubeId;
-
-    if (!cubeId){
-        return res.redirect('404');
-    }
-
-    let cube = Cube.find(x => x._id === cubeId);
-
+exports.getCubeDetails = async (req, res) => {
+    let cube = await Cube.findById(req.params.cubeId).lean();
     if (!cube) {
         return res.redirect('404');
     }

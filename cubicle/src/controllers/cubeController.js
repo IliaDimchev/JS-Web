@@ -6,7 +6,7 @@ exports.getCreateCube = (req, res) => {
 };
 
 exports.postCreateCube = async (req, res) => {
-    const {  } = req.body;
+    const { name, description, imageUrl, difficultyLevel } = req.body;
 
     let cube = new Cube({ name, description, imageUrl, difficultyLevel })
 

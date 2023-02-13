@@ -1,4 +1,9 @@
 const User = require('../models/User');
 
-exports.register = (username, email, password, rePass) =>
- User.create({ username, email, password, rePass })
+exports.register = async (username, email, password, rePass) => {
+    if (password !== rePass) {
+        throw new Error('Password mismatch!');
+    }
+
+    await User.create({ username, email, password, rePass })
+}

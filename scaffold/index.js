@@ -1,5 +1,8 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+const mongoose = require('mongoose');
+const dbEndpoint = 'mongobg://127.0.0.1:27017/'
+const dbName = 'scaffold'
 
 const routes = require('./routes');
 
@@ -11,8 +14,10 @@ app.engine('hbs', handlebars.engine({
 
 app.set('view engine', 'hbs');
 
-app.use(express.static('/static', 'public'));
+app.use('/static', express.static('public'));
 app.use(express.urlencoded({extended: false}));
 app.use(routes);
+
+mongoose.connect(dbEndpoint + dbName);
 
 app.listen(3000, () => console.log('Server is running on port 3000..'))

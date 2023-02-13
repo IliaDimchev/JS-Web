@@ -19,6 +19,8 @@ router.post('/register', async (req, res)  => {
     const { username, email, password, rePass } = req.body;
 
     await authService.register(username, email, password, rePass);
+
+    res.redirect('/');
 });
 
 

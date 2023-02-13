@@ -14,3 +14,24 @@ const userSchema = new mongoose.Schema({
         required: true,
     }
 });
+
+// Password validation through the Model
+//     }}, {
+//         virtuals: {
+//             rePass: {
+//                 set(value) {
+//                     if (this.password !== value ) {
+//                         throw new mongoose.Error('Password mismatch!');
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// );
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
+
+// Attaching Virtual property outside of the model
+// userSchema.virtual('rePass').set 

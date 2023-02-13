@@ -6,6 +6,7 @@ exports.register = async (username, email, password, rePass) => {
         throw new Error('Password mismatch!');
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    await User.create({ username, email, password, rePass })
+    await User.create({ username, email, password: hashedPassword })
 }

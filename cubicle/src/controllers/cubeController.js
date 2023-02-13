@@ -17,7 +17,7 @@ exports.postCreateCube = async (req, res) => {
 
 exports.getCubeDetails = async (req, res) => {
     const cube = await Cube.findById(req.params.cubeId).populate('accessories').lean();
-    
+
     console.log(cube);
     if (!cube) {
         return res.redirect('/404');
@@ -29,7 +29,7 @@ exports.getCubeDetails = async (req, res) => {
 exports.getAttachAccessory = async (req, res) => {
     const cube = await Cube.findById(req.params.cubeId).lean();
 
-    const accessories = await Accessory.find().lean();
+    const accessories = await Accessory.find({ _id: { $nin: cube.accessories } }).lean();
 
     res.render('cube/attach', { cube, accessories });
 }

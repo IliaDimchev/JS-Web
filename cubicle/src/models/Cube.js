@@ -17,7 +17,13 @@ const cubeSchema = new mongoose.Schema({
     imageUrl: {
         type: String,
         required: true,
-        // Add Http/https validation
+        // match: /^https?:\/\//, - regex validation
+        validate: {
+            validator: function(value) {
+                return value.startsWith('http://') || value.startsWith('https://')
+            },
+            message: 'URL is invalid'
+        }
     },
     difficultyLevel: {
         type: Number,
@@ -29,6 +35,9 @@ const cubeSchema = new mongoose.Schema({
         ref: 'Accessory'
     }]
 });
+
+// Setting validations from outside the Schema
+// cubeSchema.path('imageUrl').validate() = () => {validator:..}
 
 const Cube = mongoose.model('Cube', cubeSchema);
 

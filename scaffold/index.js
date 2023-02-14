@@ -2,9 +2,8 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const { db } = require('./constants');
 
-const dbEndpoint = 'mongodb://127.0.0.1:27017/'
-const dbName = 'scaffold'
 
 const routes = require('./routes');
 const { authentication } = require('./middlewares/authenticationMiddleware');
@@ -24,6 +23,6 @@ app.use(authentication);
 app.use(routes);
 
 mongoose.set('strictQuery', false);
-mongoose.connect(dbEndpoint + dbName);
+mongoose.connect( db.endpoint + db.name );
 
 app.listen(3000, () => console.log('Server is running on port 3000..'))

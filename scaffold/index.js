@@ -2,10 +2,12 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+
 const dbEndpoint = 'mongodb://127.0.0.1:27017/'
 const dbName = 'scaffold'
 
 const routes = require('./routes');
+const { authentication } = require('./middlewares/authenticationMiddleware');
 
 const app = express();
 
@@ -16,8 +18,9 @@ app.engine('hbs', handlebars.engine({
 app.set('view engine', 'hbs');
 
 app.use('/static', express.static('public'));
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(authentication);
 app.use(routes);
 
 mongoose.set('strictQuery', false);

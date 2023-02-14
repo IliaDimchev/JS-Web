@@ -3,22 +3,21 @@ const bcrypt = require('bcrypt');
 const jwt = require('../lib/jsonwebtoken');
 const SECRET = 'Tainataerazkrita';
 
-exports.findByUsername = (username) => User.findOne(username);
+exports.findByUsername = ({ username }) => User.findOne(username);
 
-exports.findByEmail = (email) => User.findOne(email);
+exports.findByEmail = ({ email }) => User.findOne(email);
 
 exports.register = async (username, email, password, rePass) => {
     if (password !== rePass) {
         throw new Error('Password mismatch!');
     }
 
-    const existingUser = await User.findOne(
-        {
-            $or: [
-                { email },
-                { username },
-            ]
-        })
+    const existingUser = await User.findOne({
+        $or: [
+            { email },
+            { username },
+        ]
+    });
 
     if (existingUser) {
         throw new Error('User exists!');

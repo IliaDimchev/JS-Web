@@ -6,7 +6,7 @@ const { db } = require('./constants');
 
 
 const routes = require('./routes');
-const { authentication } = require('./middlewares/authenticationMiddleware');
+const { authentication } = require('./middlewares/authMiddleware');
 
 const app = express();
 

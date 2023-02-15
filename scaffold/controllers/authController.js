@@ -10,10 +10,14 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    const token = await authService.login(email, password);
+    try {
+        const token = await authService.login(email, password);
+        res.cookie('auth', token);
+        res.redirect('/');
+    } catch (error) {
+        return res.status(404).render('auth/login', { error: error.message });
+    }
 
-    res.cookie('auth', token);
-    res.redirect('/');
 });
 
 router.get('/register', (req, res) => {
@@ -29,7 +33,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/logout', isAuthorized, (req, res) => {
-    res.clearCookier('auth');
+    res.clearCookie('auth');
     res.redirect('/');
 })
 

@@ -19,25 +19,25 @@
                 <li><a href="#">Search</a></li>
                 {{#if isAuthenticated}}
                 <li><a href="#">Create Offer</a></li>
-                <li><a href="/logout">Logout</a></li> 
-                {{else}}            
+                <li><a href="/logout">Logout</a></li>
+                {{else}}
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Register</a></li>
                 {{/if}}
 
-                
+
 
             </ul>
         </nav>
     </header>
 
-        {{#if error}}
-        <div>
-            <div class="errorContainer">
-                <p>Error</p>
-            </div>
+    {{#if error}}
+    <div>
+        <div class="errorContainer">
+            <p>{{error}}</p>
         </div>
-        {{/if}}
+    </div>
+    {{/if}}
 
     {{{body}}}
 

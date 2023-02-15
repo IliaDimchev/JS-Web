@@ -41,8 +41,6 @@ router.post('/register', async (req, res) => {
     } catch (error) {
         res.status(400).render('auth/register', { error: getErrorMessage(error) })
     }
-
-    res.redirect('/');
 });
 
 router.get('/logout', isAuthorized, (req, res) => {

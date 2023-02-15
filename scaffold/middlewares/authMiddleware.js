@@ -2,7 +2,7 @@ const jwt = require('../lib/jsonwebtoken');
 const { SECRET } = require('../constants');
 
 exports.authentication = async (req, res, next) => {
-    const ttoken = req.cookies['auth'];
+    const token = req.cookies['auth'];
 
     if (token) {
         try {

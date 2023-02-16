@@ -14,7 +14,9 @@ router.get('/catalog', async (req, res) => {
 router.get('/:cryptoId/details', async (req, res) => {
     const crypto = await cryptoService.getOne(req.params.cryptoId);
 
-    res.render('crypto/details', { crypto });
+    const isOwner = crypto.owner.toString() === req.user?._id
+
+    res.render('crypto/details', { crypto, isOwner });
 });
 
 router.get('/create', isAuthorized, (req, res) => {

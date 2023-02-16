@@ -4,6 +4,10 @@ const { isAuthorized } = require('../middlewares/authMiddleware');
 const cryptoService = require('../services/cryptoService');
 const { getErrorMessage } = require('../utils/errorUtils');
 
+router.get('/catalog', (req, res) => {
+    res.render('crypto/catalog');
+});
+
 router.get('/create', isAuthorized, (req, res) => {
     res.render('crypto/create');
 });

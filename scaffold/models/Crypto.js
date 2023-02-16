@@ -17,7 +17,7 @@ const cryptoSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    paymentMethond: {
+    paymentMethod: {
         type: String,
         enum: {
             values: ['crypto-wallet', 'credit-card', 'debit-card', 'paypal'],

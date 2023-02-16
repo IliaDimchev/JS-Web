@@ -7,8 +7,14 @@ const { getErrorMessage } = require('../utils/errorUtils');
 router.get('/catalog', async (req, res) => {
     const crypto = await cryptoService.getAll();
 
-    
-    res.render('crypto/catalog', {crypto});
+
+    res.render('crypto/catalog', { crypto });
+});
+
+router.get('/:cryptoId/details', async (req, res) => {
+    const crypto = await cryptoService.getOne(req.params.cryptoId);
+
+    res.render('crypto/details', { crypto });
 });
 
 router.get('/create', isAuthorized, (req, res) => {

@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const bookSchema = new mongoose.Schema({
     title: {
         type: String,
-        minLength: 10,
+        minLength: 2,
         required: true,
     },
     author: {
         type: String,
-        minLength: 10,
+        minLength: 2,
         required: true,
     },
     image: {
@@ -18,12 +18,12 @@ const bookSchema = new mongoose.Schema({
     },
     bookReview: {
         type: String,
-        minLength: 10,
+        minLength: 2,
         required: true,
     },
     genre: {
         type: String,
-        minLength: 10,
+        minLength: 2,
         required: true,
     },
     stars: {

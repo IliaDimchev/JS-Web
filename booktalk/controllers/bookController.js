@@ -6,8 +6,7 @@ const bookService = require('../services/bookService');
 const { getErrorMessage } = require('../utils/errorUtils');
 
 router.get('/catalog', async (req, res) => {
-    // const crypto = await cryptoService.getAll();
-    const books = []
+    const books = await bookService.getAll();
 
     res.render('books/catalog', { books });
 });

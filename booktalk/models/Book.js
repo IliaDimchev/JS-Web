@@ -8,7 +8,7 @@ const bookSchema = new mongoose.Schema({
     },
     author: {
         type: String,
-        minLength: 2,
+        minLength: 5,
         required: true,
     },
     image: {
@@ -18,12 +18,12 @@ const bookSchema = new mongoose.Schema({
     },
     bookReview: {
         type: String,
-        minLength: 2,
+        minLength: 10,
         required: true,
     },
     genre: {
         type: String,
-        minLength: 2,
+        minLength: 3,
         required: true,
     },
     stars: {

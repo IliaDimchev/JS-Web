@@ -8,7 +8,7 @@ exports.search = async (name, paymentMethod) => {
     let crypto = await this.getAll();
 
     if (name) {
-        crypto = crypto.filter(x => x.name.toLowerCase() == name );
+        crypto = crypto.filter(x => x.name.toLowerCase() == name.toLowerCase() );
     }
 
     if (paymentMethod) {
@@ -17,6 +17,13 @@ exports.search = async (name, paymentMethod) => {
 
     return crypto;
 };
+
+// Database filtration
+// exports.searchDb = async (name, paymentMethod) => {
+//     Crypto.find({
+//         name: {$regex: new RegExp(name, 'ig')}, 
+//     });
+// };
 
 exports.buy = async (userId, cryptoId) => {
     const crypto = await Crypto.findById(cryptoId);

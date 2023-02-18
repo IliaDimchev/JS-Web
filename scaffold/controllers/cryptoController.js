@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const { paymentMethodsMap } = require('../constants');
 const { isAuthorized } = require('../middlewares/authMiddleware');
 const cryptoService = require('../services/cryptoService');
 const { getErrorMessage } = require('../utils/errorUtils');
@@ -26,11 +27,18 @@ router.get('/:cryptoId/details', async (req, res) => {
     const isOwner = crypto.owner.toString() === req.user?._id;
     const isBuyer = crypto.buyers?.some(id => id == req.user?._id);
 
+    crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod];
+    
     res.render('crypto/details', { crypto, isOwner, isBuyer });
 });
 
 router.get('/:cryptoId/buy', isAuthorized, async (req, res) => {
-    await cryptoService.buy(req.user._id, req.params.cryptoId);
+    try {
+        await cryptoService.buy(req.user._id, req.params.cryptoId);
+    } catch (error) {
+        return res.status(404).render('/home/404', { error: getErrorMessage(error) });
+    }
+
 
     res.redirect(`/crypto/${req.params.cryptoId}/details`);
 });

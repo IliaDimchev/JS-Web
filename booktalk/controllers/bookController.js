@@ -31,6 +31,20 @@ router.get('/catalog/:bookId/wish', isAuthorized, async (req, res) => {
     res.redirect(`/catalog/${req.params.bookId}/details`);
 });
 
+router.get('/catalog/:bookId/edit', isAuthorized, async (req, res) => {
+    const book = await bookService.getOne(req.params.bookId);
+    
+    res.render('books/edit', { book });
+});
+
+router.post('/catalog/:bookId/edit', isAuthorized, async (req, res) => {
+    const cryptoData = req.body;
+
+    await cryptoService.edit(req.params.cryptoId, cryptoData);
+
+    res.redirect(`/catalog/${req.params.cryptoId}/details`);
+});
+
 router.get('/catalog/:bookId/delete', isAuthorized, async (req, res) => {
     await bookService.delete(req.params.bookId);
 

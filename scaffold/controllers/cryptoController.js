@@ -19,6 +19,12 @@ router.get('/:cryptoId/details', async (req, res) => {
     res.render('crypto/details', { crypto, isOwner });
 });
 
+router.get('/:cryptoId/byt', isAuthorized, async (req, res) => {
+    await cryptoService.buy(req.user._id, req.params.cryptoId);
+
+
+});
+
 router.get('/create', isAuthorized, (req, res) => {
     res.render('crypto/create');
 });

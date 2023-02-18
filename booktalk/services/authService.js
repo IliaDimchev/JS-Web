@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('../lib/jsonwebtoken');
 const { SECRET } = require('../constants');
 
-exports.findByUsername = ({ username }) => User.findOne(username);
+exports.findByUsername = (username) => User.findOne({ username });
 
-exports.findByEmail = ({ email }) => User.findOne(email);
+exports.findByEmail = (email) => User.findOne({ email });
 
 exports.register = async (username, email, password, rePass) => {
     if (password !== rePass) {

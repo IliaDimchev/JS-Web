@@ -14,3 +14,5 @@ exports.buy = async (userId, cryptoId) => {
 // Crypto.findByIdAndUpdate(cryptoId, {$push: {buyers: userId}})
 
 exports.create = (ownerId, cryptoData) => Crypto.create({ ...cryptoData, owner: ownerId });
+
+exports.edit = (cryptoId, cryptoData) => Crypto.findByIdAndUpdate(cryptoId, cryptoData);

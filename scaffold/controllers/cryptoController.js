@@ -14,15 +14,16 @@ router.get('/catalog', async (req, res) => {
 router.get('/:cryptoId/details', async (req, res) => {
     const crypto = await cryptoService.getOne(req.params.cryptoId);
 
-    const isOwner = crypto.owner.toString() === req.user?._id
+    const isOwner = crypto.owner.toString() === req.user?._id;
+    const isBuyer = crypto.buyers.some(id => id == req.user?._id);
 
-    res.render('crypto/details', { crypto, isOwner });
+    res.render('crypto/details', { crypto, isOwner, isBuyer });
 });
 
-router.get('/:cryptoId/byt', isAuthorized, async (req, res) => {
+router.get('/:cryptoId/buy', isAuthorized, async (req, res) => {
     await cryptoService.buy(req.user._id, req.params.cryptoId);
 
-
+    res.redirect(`/crypto/${req.params.cryptoId}/details`);
 });
 
 router.get('/create', isAuthorized, (req, res) => {

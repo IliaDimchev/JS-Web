@@ -20,6 +20,17 @@ router.get('/catalog/:bookId/details', async (req, res) => {
     res.render('books/details', { book, isOwner, isReader });
 });
 
+router.get('/catalog/:bookId/wish', isAuthorized, async (req, res) => {
+    try {
+        await bookService.wish(req.user._id, req.params.bookId);
+    } catch (error) {
+        return res.status(404).render('/home/404', { error: getErrorMessage(error) });
+    }
+
+
+    res.redirect(`/catalog/${req.params.bookId}/details`);
+});
+
 router.get('/create', isAuthorized, (req, res) => {
     res.render('books/create');
 });

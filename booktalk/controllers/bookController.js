@@ -38,11 +38,11 @@ router.get('/catalog/:bookId/edit', isAuthorized, async (req, res) => {
 });
 
 router.post('/catalog/:bookId/edit', isAuthorized, async (req, res) => {
-    const cryptoData = req.body;
+    const bookData = req.body;
 
-    await cryptoService.edit(req.params.cryptoId, cryptoData);
+    await bookService.edit(req.params.bookId, bookData);
 
-    res.redirect(`/catalog/${req.params.cryptoId}/details`);
+    res.redirect(`/catalog/${req.params.bookId}/details`);
 });
 
 router.get('/catalog/:bookId/delete', isAuthorized, async (req, res) => {

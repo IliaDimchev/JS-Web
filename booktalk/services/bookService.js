@@ -14,4 +14,6 @@ exports.wish = async (userId, bookId) => {
 
 exports.create = (ownerId, bookData) => Book.create({ ...bookData, owner: ownerId });
 
+exports.edit = (bookId, bookData) => Book.findByIdAndUpdate(bookId, bookData, { runValidators: true });
+
 exports.delete = (bookId) => Book.findByIdAndDelete(bookId);

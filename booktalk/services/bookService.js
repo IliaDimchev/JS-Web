@@ -13,3 +13,5 @@ exports.wish = async (userId, bookId) => {
 };
 
 exports.create = (ownerId, bookData) => Book.create({ ...bookData, owner: ownerId });
+
+exports.delete = (bookId) => Book.findByIdAndDelete(bookId);

@@ -31,6 +31,12 @@ router.get('/catalog/:bookId/wish', isAuthorized, async (req, res) => {
     res.redirect(`/catalog/${req.params.bookId}/details`);
 });
 
+router.get('/catalog/:bookId/delete', isAuthorized, async (req, res) => {
+    await bookService.delete(req.params.bookId);
+
+    res.redirect('/catalog');
+});
+
 router.get('/create', isAuthorized, (req, res) => {
     res.render('books/create');
 });

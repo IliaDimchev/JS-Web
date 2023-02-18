@@ -11,6 +11,15 @@ router.get('/catalog', async (req, res) => {
     res.render('books/catalog', { books });
 });
 
+router.get('/catalog/:bookId/details', async (req, res) => {
+    const book = await bookService.getOne(req.params.bookId);
+
+    const isOwner = book.owner.toString() === req.user?._id;
+    const isReader = book.wishlist?.some(id => id == req.user?._id);
+    
+    res.render('books/details', { book, isOwner, isReader });
+});
+
 router.get('/create', isAuthorized, (req, res) => {
     res.render('books/create');
 });

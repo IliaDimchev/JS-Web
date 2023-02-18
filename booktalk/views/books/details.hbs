@@ -3,13 +3,11 @@
     <article class="details-card">
 
         <article class="details-card-text">
-            <h2>Title:<br> A Game Of Thrones</h2>
-            <h3>Author: George R.R Martin</h3>
-            <h3>Stars: 5</h3>
-            <h3>Genre: Fiction</h3>
-            <h3>Review: Okay - I am SO incredibly late to this party but hey, I made it! And the hype was real!
-                Winter is coming. A totally magnificent start to a seminal epic fantasy series. If you love watching
-                the first season of Game of Thrones, you're most likely going to love reading A Game of Thrones.
+            <h2>Title:<br> {{book.name}}</h2>
+            <h3>Author: {{book.author}}</h3>
+            <h3>Stars: {{book.stars}}</h3>
+            <h3>Genre: {{book.genre}}</h3>
+            <h3>Review: {{book.bookReview}}
             </h3>
 
             <!-- If there is no registered user, do not display buttons-->
@@ -26,7 +24,7 @@
         </article>
 
         <article class="details-card-image">
-            <img src="./image/Game-of-thrones.jpg">
+            <img src="{{book.image}}">
         </article>
 
     </article>

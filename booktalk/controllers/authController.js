@@ -3,6 +3,7 @@ const router = require('express').Router();
 const authService = require('../services/authService');
 const { isAuthorized } = require('../middlewares/authMiddleware');
 const { getErrorMessage } = require('../utils/errorUtils');
+const bookService = require('../services/bookService');
 
 // Error Response Handler
 // const errorResponse = (template, error, status = 400) => {
@@ -46,6 +47,14 @@ router.post('/register', async (req, res) => {
 router.get('/logout', isAuthorized, (req, res) => {
     res.clearCookie('auth');
     res.redirect('/');
-})
+});
+
+router.get('/profile', async (req, res) => {
+    const email = req.user?.email;
+
+    const books = await bookService.getWishlist(req.user?._id);
+
+    res.render('auth/profile', { email, books });
+});
 
 module.exports = router;

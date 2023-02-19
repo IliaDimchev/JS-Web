@@ -13,15 +13,17 @@ router.get('/catalog', async (req, res) => {
 });
 
 router.get('/catalog/:auctionId/details', async (req, res) => {
-    const auction = await auctionService.getOne(req.params.auctionId).populate('author');
+    const auction = await auctionService.getOne(req.params.auctionId).populate('author').populate('bidders');
     const authorName = `${auction.author.firstName} ${auction.author.lastName}`
     const isAuthor = auction.author._id.toString() === req.user?._id;
     const isBidder = auction.bidders == req.user?._id
     const bidders = auction.bidders
+    const highestBidder = `${auction.bidders.firstName} ${auction.bidders.lastName}`
+    console.log(auction)
 
     auction.category = categoryMap[auction.category];
 
-    res.render('auction/details', { auction, isAuthor, isBidder, authorName, bidders });
+    res.render('auction/details', { auction, isAuthor, isBidder, authorName, bidders, highestBidder });
 });
 
 router.post('/catalog/:auctionId', isAuthorized, async (req, res) => {

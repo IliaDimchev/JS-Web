@@ -10,6 +10,10 @@ const auctionSchema = new mongoose.Schema({
     },
     category: {
         type: String,
+        enum: {
+            values: ['estate', 'vehicles', 'furniture', 'electronics', 'other'],
+            message: 'Invalid category',
+        },
         required: true,
     },
     imageUrl: {

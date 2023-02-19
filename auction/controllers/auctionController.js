@@ -5,10 +5,10 @@ const auctionService = require('../services/auctionService');
 const { getErrorMessage } = require('../utils/errorUtils');
 
 router.get('/catalog', async (req, res) => {
-    const auctons = await auctionService.getAll();
+    const auctions = await auctionService.getAll();
 
 
-    res.render('auction/catalog', { auctons });
+    res.render('auction/catalog', { auctions });
 });
 
 router.get('/create', isAuthorized, (req, res) => {

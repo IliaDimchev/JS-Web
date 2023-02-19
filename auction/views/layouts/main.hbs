@@ -20,11 +20,11 @@
             <nav class="main-nav nav-mid">
                 <ul>
                     <li>
-                        <a href="#">Browse</a>
+                        <a href="/search">Browse</a>
                     </li>
-                    <!-- User actions -->
+                    {{#if isAuthenticated}}
                     <li class="user">
-                        <a href="#">Publish</a>
+                        <a href="/create">Publish</a>
                     </li>
 
                     <!-- Bonus action -->
@@ -35,29 +35,27 @@
                     -->
 
                     <li class="user">
-                        <a href="#">Logout</a>
+                        <a href="/logout">Logout</a>
                     </li>
-                    <!-- Guest actions -->
+                    {{else}}
                     <li class="guest">
-                        <a href="#">Register</a>
+                        <a href="/register">Register</a>
                     </li>
                     <li class="guest">
-                        <a href="#">Login</a>
+                        <a href="/login">Login</a>
                     </li>
+                    {{/if}}
                 </ul>
             </nav>
         </header>
 
         <main>
-
-            <!-- In case of error, display the following div-->
-            <!--
-
+            {{#if error}}
             <div class="error-box">
-                <p>Show each error in a separate paragraph</p>
+                <p>{{error}}</p>
             </div>
+            {{/if}}
 
-            -->
             {{{body}}}
         </main>
 

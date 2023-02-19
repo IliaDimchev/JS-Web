@@ -7,17 +7,12 @@ exports.findByUsername = (username) => User.findOne({ username });
 
 exports.findByEmail = (email) => User.findOne({ email });
 
-exports.register = async (username, email, password, rePass) => {
+exports.register = async (email, firstName, lastName, password, rePass) => {
     if (password !== rePass) {
         throw new Error('Password mismatch!');
     }
 
-    const existingUser = await User.findOne({
-        $or: [
-            { email },
-            { username },
-        ]
-    });
+    const existingUser = await User.findOne({ email });
 
     if (existingUser) {
         throw new Error('User exists!');
@@ -25,7 +20,7 @@ exports.register = async (username, email, password, rePass) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await User.create({ username, email, password: hashedPassword });
+    await User.create({ email, firstName, lastName, password: hashedPassword });
 
     return this.login(email, password);
 };

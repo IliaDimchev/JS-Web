@@ -19,7 +19,6 @@ router.get('/catalog/:auctionId/details', async (req, res) => {
     const isBidder = auction.bidders == req.user?._id
     const bidders = auction.bidders
     const highestBidder = `${auction.bidders.firstName} ${auction.bidders.lastName}`
-    console.log(auction)
 
     auction.category = categoryMap[auction.category];
 
@@ -44,6 +43,22 @@ router.post('/catalog/:auctionId', isAuthorized, async (req, res) => {
 
 
     res.redirect(`/catalog/${req.params.auctionId}/details`);
+});
+
+router.get('/catalog/:auctionId/edit', isAuthorized, async (req, res) => {
+    const auction = await auctionService.getOne(req.params.auctionId);
+    const category = getCategoryViewData(auction.category);
+    const bidder = Boolean(auction.bidders);
+
+    res.render('auction/edit', { auction, category, bidder });
+});
+
+router.post('/:cryptoId/edit', isAuthorized, async (req, res) => {
+    const cryptoData = req.body;
+
+    await cryptoService.edit(req.params.cryptoId, cryptoData);
+
+    res.redirect(`/crypto/${req.params.cryptoId}/details`);
 });
 
 router.get('/create', isAuthorized, (req, res) => {

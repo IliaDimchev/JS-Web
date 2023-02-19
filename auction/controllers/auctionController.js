@@ -4,6 +4,13 @@ const { getCategoryViewData } = require('../utils/viewDataUtils');
 const auctionService = require('../services/auctionService');
 const { getErrorMessage } = require('../utils/errorUtils');
 
+router.get('/catalog', async (req, res) => {
+    const auctons = await auctionService.getAll();
+
+
+    res.render('auction/catalog', { auctons });
+});
+
 router.get('/create', isAuthorized, (req, res) => {
     res.render('auction/create');
 });

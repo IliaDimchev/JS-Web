@@ -1,9 +1,10 @@
-@import './404.css';
 @import './catalog.css';
-@import './create.css';
-@import './details.css';
-@import './edit.css';
 @import './home.css';
 @import './login.css';
-@import './register.css';
-@import './search.css';
+@import './404.css';
+@import './profileFunctions.css';
+@import './create.css';
+@import './edit.css';
+@import './details.css';
+@import './profile.css';
+@import './petProfile.css';

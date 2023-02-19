@@ -16,10 +16,10 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     try {
-        const token = await authService.login(email, password);
+        const token = await authService.login(username, password);
         res.cookie('auth', token);
         res.redirect('/');
     } catch (error) {

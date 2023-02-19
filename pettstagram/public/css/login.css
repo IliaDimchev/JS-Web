@@ -1,66 +1,51 @@
-main {
-    padding-top: 50px;
+.login-register-div {
+	margin-top: 10%;
 }
 
-.login-box {
-    color: white;
-    width: 360px;
-    height: 330px;
-    margin: auto;
-    background-color: rgba(70, 20, 158, 0.304);
-    border: 2px solid white;
-    border-radius: 20px;
+.login-register-box, .second-option {
+	display: block;
+	width: 300px;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(156, 152, 152);
+	padding: 40px;
+	margin-bottom: 15px;
+	border-radius: 3px;
+	border: 1px solid;
+	box-shadow: 1px 2px 3px #888888;
 }
 
-.login-box h1 {
-    text-align: center;
-    padding-top: 15px;
+.login-register-box h1 {
+	font-family: 'Indie Flower', cursive;
+	font-size: 40px;
+	text-align: center;
+	margin-top: -10px;
 }
 
-h4 {
-    margin-top: 10px;
-    text-align: center;
+.login-register-box label {
+	display: none;
 }
 
-form {
-    width: 300px;
-    margin-left: 20px;
+.login-register-box input {
+	background-color: rgb(240, 230, 230);
+	border: 0.1px solid rgb(186, 184, 184);
+	border-radius: 3px;
+	height: 30px;
+	width: 100%;
+	padding-left: 2px;
+	margin-top: 10px;
 }
 
-form label {
-    display: flex;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    font-size: 18px;
+.login-register-box button {
+	background-color: rgb(0, 162, 255);
+	color: white;
+	font-weight: bold;
+	border: none;
+	width: 100%;
+	border-radius: 3px;
+	margin-top: 10px;
+	height: 30px;
 }
 
-form input {
-    width: 320px;
-    height: 30px;
-    padding-left: 7px;
-    border: none;
-    border: 1px solid gray;
-    border-radius: 8px;
-    outline: none;
-}
-
-input[type="submit"] {
-    width: 320px;
-    height: 35px;
-    margin-top: 20px;
-    border: none;
-    background-color: #49c1a2;
-    color: white;
-    font-size: 15px;
-}
-
-.login-box p {
-    text-align: center;
-    padding-top: 20px;
-    font-size: 15px;
-
-}
-
-.login-box p>a {
-    color: #49c1a2;
+.second-option {
+	text-align: center;
 }

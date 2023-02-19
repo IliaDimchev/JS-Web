@@ -1,26 +1,25 @@
-<main>
-    <!-- In case of error, you should display div with class "errorContainer" -->
-    <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-    <!-- <div>
-            <div class="errorContainer">
-                <p>Error</p>
-            </div>
-        </div> -->
+<div class="login-register-div">
+    <div class="login-register-box">
+        <h1>Petstagram</h1>
 
-    <div class="register-box">
-        <h1>Register</h1>
-        <h4>It's free and only take a minute</h4>
+        <!-- Start Register Form -->
         <form method="POST">
-            <label>Username</label>
-            <input type="text" name="username" placeholder="Username..">
-            <label>Email</label>
-            <input type="text" name="email" placeholder="Email..">
-            <label>Password</label>
-            <input type="password" name="password" placeholder="Password..">
-            <label>Confirm Password</label>
-            <input type="password" name="rePass" placeholder="Confirm Password..">
-            <input type="submit" value="Submit">
+            <input type="text" name="username" placeholder="Username">
+
+            <input type="email" name="email" placeholder="Email">
+
+            <input type="password" name="password" placeholder="Password">
+
+            <input type="password" name="rePass" placeholder="Repeat Password">
+
+            <!-- Register Button -->
+            <button type="submit">Register</button>
         </form>
-        <p>Already have an account? <a href="/login">Login here</a></p>
+
     </div>
-</main>
+    <div class="second-option">
+
+        <!-- Link to Login Page -->
+        <p>Have an account? <a href="/login">LogIn</a></p>
+    </div>
+</div>

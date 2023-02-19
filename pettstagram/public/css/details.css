@@ -1,113 +1,139 @@
-main {
-    padding-top: 20px;
+.userDetails a {
+  color: initial;
 }
 
-#details-info {
-    border-top: 4px solid #ff960b;
-    border-bottom: 4px solid #ff960b;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.20),
-        0 2px 10px 0 rgba(0, 0, 0, 0.20);
-    background-color: rgba(70, 20, 158, 0.304);
-    width: 360px;
-    height: auto;
-    margin: auto;
+.petDescription {
+  font-size: 18px;
+  margin-left: 10px;
 }
 
-#details-info h1 {
-    font-size: 28px;
-    margin-top: 20px;
-    text-align: center;
+.pet-details {
+  margin: 5px 0 5px -1px;
 }
 
-#details-info .coin-image>img {
-    border-radius: 50%;
-    margin: 20px auto;
-    display: block;
-    width: 100px;
-    border: 5px solid #fff;
+.comments {
+  display: flex;
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
 }
 
-#details-info .coin-text {
-    margin-top: 10px;
-    margin-bottom: 15px;
+.comments .userDetails {
+  display: block !important;
+  margin-top: 10px;
+  margin-left: 10px;;
 }
 
-#details-info #payment {
-    text-align: center;
-    opacity: 60%;
+.comments span {
+  color: gray;
+  font-size: 10px;
 }
 
-#details-info #price {
-    margin-top: 10px;
-    margin-left: 20px;
+.comments h3 {
+  display: flex;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
-#details-info #description {
-    border-left: 1px solid white;
-    padding-left: 10px;
-    margin-top: 10px;
-    margin-left: 10px;
+.comments .top {
+  padding: 10px !important;
 }
 
-.btn-edit,
-.btn-delete,
-.btn-buy {
-    border: 5em;
-    cursor: pointer;
-    outline: none;
-    font-size: 16px;
-    -webkit-transform: translate(0);
-    transform: translate(0);
-    background-image: linear-gradient(45deg, #4568dc, #b06ab3);
-    padding: 0.7em 2em;
-    border-radius: 65px;
-    box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
-    -webkit-transition: box-shadow 0.25s;
-    transition: box-shadow 0.25s;
-    color: white;
-    text-decoration: none;
+.comment-data {
+  display: flex;
+  font-size: 10px;
+  word-break: break-all;
+  white-space: normal;
+  font-weight: bold;
+  color: rgb(70, 65, 65);
 }
 
-.btn-buy {
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    width: 200px;
-    margin-bottom: 20px;
+.comment-data h3 {
+  margin-top: 5px;
 }
 
-.author {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 15px;
+.comment-data p {
+  margin-top: 4px;
+  font-size: 13px;
+  word-wrap: break-word;
+  white-space: normal;
+  font-weight: lighter;
 }
 
-.btn-delete {
-    margin-left: 60px;
+.add-comment-details .addComments {
+  margin-top: 0 !important;
 }
 
-.btn-edit:hover,
-.btn-delete:hover,
-.btn-buy:hover {
-    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+.edit-delete-btns {
+  position: absolute;
+  top: 20px;
+  right: 10px;
 }
 
-.buy-message {
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    border: 5em;
-    width: 350px;
-    margin-top: 15px;
-    margin-bottom: 30px;
-    font-size: 16px;
-    background-image: linear-gradient(45deg, #4568dc, #b06ab3);
-    padding: 0.7em;
-    border-radius: 65px;
-    box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
-    -webkit-transition: box-shadow 0.25s;
-    transition: box-shadow 0.25s;
-    color: white;
+.edit-delete-btns img {
+  width: 20px;
+  margin-left: 5px;
+}
+
+.message {
+  font-weight: 400;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #777;
+  line-height: 1.5em;
+}
+
+.message b {
+  color: #262626;
+}
+
+.message span {
+  cursor: pointer;
+  color: #1d92ff;
+}
+
+.addComments {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.addComments button {
+  position: absolute;
+  right: 30px;
+  color: #1d92ffcb;
+  font-weight: 500;
+  font-size: 15px;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+#comment-textarea {
+  position: absolute;
+  left: 30px;
+  width: 85%;
+  resize: none;
+  overflow: hidden;
+  height: 20px;
+  border: none;
+  outline: none;
+  font-weight: 400;
+  font-size: 14px;
+  color: #262626;
+  background: none;
+}
+
+textarea.text::placeholder {
+  color: #777;
+}
+
+.addComments form label {
+  display: none;
+}
+
+.addComments form {
+  display: flex;
+  margin-bottom: 15px;
 }

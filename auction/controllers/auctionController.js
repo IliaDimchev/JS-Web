@@ -13,14 +13,15 @@ router.get('/catalog', async (req, res) => {
 });
 
 router.get('/catalog/:auctionId/details', async (req, res) => {
-    const auction = await auctionService.getOne(req.params.auctionId);
-
-    const isAuthor = auction.author.toString() === req.user?._id;
+    const auction = await auctionService.getOne(req.params.auctionId).populate('author');
+    const authorName = `${auction.author.firstName} ${auction.author.lastName}`
+    const isAuthor = auction.author._id.toString() === req.user?._id;
     const isBidder = auction.bidders?.some(id => id == req.user?._id);
+    const bidders = auction.bidders
 
     auction.category = categoryMap[auction.category];
     
-    res.render('auction/details', { auction, isAuthor, isBidder });
+    res.render('auction/details', { auction, isAuthor, isBidder, authorName, bidders });
 });
 
 router.get('/create', isAuthorized, (req, res) => {

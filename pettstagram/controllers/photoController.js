@@ -44,8 +44,13 @@ router.get('/catalog/:photoId/details', async (req, res) => {
 });
 
 router.post('/catalog/:photoId/details', isAuthorized, async (req, res) => {
-    const comment = req.body.comment;
-    await photoService.comment(req.user?._id, comment, req.params.photoId);
+
+    try {
+        const comment = req.body.comment;
+        await photoService.comment(req.user?._id, comment, req.params.photoId);
+    } catch (error) {
+        return res.status(404).render('/home/404', { error: getErrorMessage(error) });
+    }
 
     res.redirect(`/catalog/${req.params.photoId}/details`);
 });

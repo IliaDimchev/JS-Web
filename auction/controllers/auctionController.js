@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { isAuthorized } = require('../middlewares/authMiddleware');
+const { isAuthorized, isOwner } = require('../middlewares/authMiddleware');
 const { getCategoryViewData } = require('../utils/viewDataUtils');
 const auctionService = require('../services/auctionService');
 const { getErrorMessage } = require('../utils/errorUtils');
@@ -16,7 +16,7 @@ router.get('/catalog/:auctionId/details', async (req, res) => {
     const auction = await auctionService.getOne(req.params.auctionId).populate('author').populate('bidders');
     const authorName = `${auction.author.firstName} ${auction.author.lastName}`
     const isAuthor = auction.author._id.toString() === req.user?._id;
-    const isBidder = auction.bidders == req.user?._id
+    const isBidder = auction.bidders?._id == req.user?._id
     const bidders = auction.bidders
     let highestBidder = '';
     if(auction.bidders){
@@ -49,11 +49,17 @@ router.post('/catalog/:auctionId', isAuthorized, async (req, res) => {
 });
 
 router.get('/catalog/:auctionId/edit', isAuthorized, async (req, res) => {
-    const auction = await auctionService.getOne(req.params.auctionId);
-    const category = getCategoryViewData(auction.category);
-    const bidder = Boolean(auction.bidders);
+    const auction = await auctionService.getOne(req.params.auctionId).populate('author');
+    if (req.user._id == auction.author._id.toString()) {
+        const category = getCategoryViewData(auction.category);
+        const bidder = Boolean(auction.bidders);
+    
+        res.render('auction/edit', { auction, category, bidder });
+    } else {
+        res.redirect('/');
+    }
 
-    res.render('auction/edit', { auction, category, bidder });
+    
 });
 
 router.post('/catalog/:auctionId/edit', isAuthorized, async (req, res) => {
@@ -65,9 +71,15 @@ router.post('/catalog/:auctionId/edit', isAuthorized, async (req, res) => {
 });
 
 router.get('/catalog/:auctionId/delete', isAuthorized, async (req, res) => {
-    await auctionService.delete(req.params.auctionId);
+    const auction = await auctionService.getOne(req.params.auctionId).populate('author');
+    if (req.user._id == auction.author._id.toString()){
+        await auctionService.delete(req.params.auctionId);
+        res.redirect('/catalog');
+    } else {
+        res.redirect('/');
+    }
 
-    res.redirect('/catalog');
+
 });
 
 router.get('/create', isAuthorized, (req, res) => {

@@ -27,3 +27,11 @@ exports.isAuthorized = (req, res, next) => {
     next();
 
 }
+
+exports.isOwner = (req, res, next) => {
+    if (req.user._id != req.params.auctionId) {
+        return res.redirect('/');
+    }
+    next();
+
+}

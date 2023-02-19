@@ -15,15 +15,33 @@ router.get('/catalog/:photoId/details', async (req, res) => {
 
     const isOwner = photo.owner._id == req.user?._id;
     // const isBuyer = photo.buyers?.some(id => id == req.user?._id);
-    const canComment = req.user._id != photo.owner._id
+    const canComment = req.user?._id != photo.owner._id
     photo.comments = [];
     res.render('photo/details', { photo, isOwner, canComment });
 });
 
-router.get('/catalog/:photoId/edit', isAuthorized, async (req, res) => {
-    const photo = await photoService.getOne(req.params.photoId);
+router.post('catalog/:photoId/details', isAuthorized, async (req, res) => {
+    try {
+        const { comment } = req.body;
+        console.log(comment);
+        await photoService.comment(req.user._id, comment, req.params.photoId);
+    } catch (error) {
+        return res.status(404).render('/home/404', { error: getErrorMessage(error) });
+    }
 
-    res.render('photo/edit', { photo });
+
+    res.redirect(`/catalog/${req.params.photoId}/details`);
+});
+
+router.get('/catalog/:photoId/edit', isAuthorized, async (req, res) => {
+
+
+    const photo = await photoService.getOne(req.params.photoId).populate('owner');
+    if (req.user?._id == photo.owner._id.toString()) {
+        res.render('photo/edit', { photo });
+    } else {
+        res.redirect('/');
+    }
 });
 
 router.post('/catalog/:photoId/edit', isAuthorized, async (req, res) => {
@@ -32,6 +50,20 @@ router.post('/catalog/:photoId/edit', isAuthorized, async (req, res) => {
     await photoService.edit(req.params.photoId, photoData);
 
     res.redirect(`/catalog/${req.params.photoId}/details`);
+});
+
+router.get('/catalog/:photoId/delete', isAuthorized, async (req, res) => {
+    const photo = await photoService.getOne(req.params.photoId).populate('owner');
+    if (req.user?._id == photo.owner._id.toString()){
+        await photoService.delete(req.params.photoId);
+        res.redirect('/catalog');
+    } else {
+        res.redirect('/');
+    }
+});
+
+router.get('/create', isAuthorized, (req, res) => {
+    res.render('photo/create');
 });
 
 router.get('/create', isAuthorized, (req, res) => {

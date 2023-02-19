@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const auctionSchema = new mongoose.Schema({
     title: {
         type: String,
+        minLength: 4,
         required: true,
     },
     description: {
         type: String,
+        maxLength: 200,
     },
     category: {
         type: String,
@@ -21,6 +23,7 @@ const auctionSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
+        min: 0,
         required: true,
     },
     author: {

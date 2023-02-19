@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('../lib/jsonwebtoken');
 const { SECRET } = require('../constants');
 
-exports.findByUsername = (username) => User.findOne({username});
+exports.findByUsername = (username) => User.findOne({ username });
 
-exports.findByEmail = (email) => User.findOne({email});
+exports.findByEmail = (email) => User.findOne({ email });
 
 exports.register = async (username, email, password, rePass) => {
     if (password !== rePass) {
@@ -23,10 +23,6 @@ exports.register = async (username, email, password, rePass) => {
         throw new Error('User exists!');
     }
 
-    if (password.length < 4) {
-        throw new Error('Password too short!');
-    };
-
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await User.create({ username, email, password: hashedPassword });
@@ -36,11 +32,13 @@ exports.register = async (username, email, password, rePass) => {
 
 exports.login = async (email, password) => {
     const user = await this.findByEmail(email);
+
     if (!user) {
         throw new Error('Invalid email or password!');
     }
-    
+
     const isValid = await bcrypt.compare(password, user.password);
+
     if (!isValid) {
         throw new Error('Invalid email or password!');
     }

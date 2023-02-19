@@ -16,12 +16,32 @@ router.get('/catalog/:auctionId/details', async (req, res) => {
     const auction = await auctionService.getOne(req.params.auctionId).populate('author');
     const authorName = `${auction.author.firstName} ${auction.author.lastName}`
     const isAuthor = auction.author._id.toString() === req.user?._id;
-    const isBidder = auction.bidders?.some(id => id == req.user?._id);
+    const isBidder = auction.bidders == req.user?._id
     const bidders = auction.bidders
 
     auction.category = categoryMap[auction.category];
-    
+
     res.render('auction/details', { auction, isAuthor, isBidder, authorName, bidders });
+});
+
+router.post('/catalog/:auctionId', isAuthorized, async (req, res) => {
+    const auction = await auctionService.getOne(req.params.auctionId).populate('author');
+    const newPrice = req.body.price
+    const authorName = `${auction.author.firstName} ${auction.author.lastName}`
+    const isAuthor = auction.author._id.toString() === req.user?._id;
+    const isBidder = auction.bidders == req.user?._id
+    const bidders = auction.bidders
+
+    auction.category = categoryMap[auction.category];
+
+    try {
+        await auctionService.bid(req.user._id, req.params.auctionId, newPrice);
+    } catch (error) {
+        return res.status(400).render('auction/details', { auction, isAuthor, isBidder, authorName, bidders, error: getErrorMessage(error) });
+    }
+
+
+    res.redirect(`/catalog/${req.params.auctionId}/details`);
 });
 
 router.get('/create', isAuthorized, (req, res) => {

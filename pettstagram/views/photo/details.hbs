@@ -70,7 +70,7 @@
                 </div>
                 <div class="comments">
                     <div class="comments-top">
-                        {{#each photo.commentsList}}
+                        {{#each photo.commentList}}
                         <div class="userDetails">
                             <div class="comment-data">
                                 <div class="profilepic">
@@ -83,7 +83,7 @@
                                 </div>
 
                                 <!--User's username-->
-                                <p><b>{{userId}}</b>- {{comment}}</p>
+                                <p><b>{{userId.username}}</b>- {{comment}}</p>
                             </div>
                         </div>
                         {{/each}}

@@ -29,28 +29,21 @@ router.get('/profile', isAuthorized, async (req, res) => {
 });
 
 router.get('/catalog/:photoId/details', async (req, res) => {
-    const photo = await photoService.getOne(req.params.photoId).populate('owner').populate('commentsList');
+    const photo = await photoService.getOne(req.params.photoId).populate('owner').populate('commentList.userId');
 
     const isOwner = photo.owner._id == req.user?._id;
     const canComment = req.user?._id != photo.owner._id
-    const comments = photo.commentsList;
-
-    for (comment in comments){
-        let user = await authService.getUserData(comments[comment].userId);
-        comments[comment].userId = user.username;
-    }
+    const comments = photo.commentList;
 
     res.render('photo/details', { photo, isOwner, canComment, comments });
 });
 
 router.post('/catalog/:photoId/details', isAuthorized, async (req, res) => {
 
-    try {
-        const comment = req.body.comment;
-        await photoService.comment(req.user?._id, comment, req.params.photoId);
-    } catch (error) {
-        return res.status(404).render('/home/404', { error: getErrorMessage(error) });
-    }
+    const comment = req.body.comment;
+    const photoId = req.params.photoId;
+    const userId = req.user?._id;
+    await photoService.commentPhoto(photoId, userId, comment);
 
     res.redirect(`/catalog/${req.params.photoId}/details`);
 });

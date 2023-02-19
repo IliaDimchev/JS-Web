@@ -16,8 +16,8 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-
+    let { username, password } = req.body;
+    username = username.toLowerCase()
     try {
         const token = await authService.login(username, password);
         res.cookie('auth', token);
@@ -33,7 +33,9 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-    const { username, email, password, rePass } = req.body;
+    let { username, email, password, rePass } = req.body;
+    username = username.toLowerCase();
+    email = email.toLowerCase();
     try {
         const token = await authService.register(username, email, password, rePass);
         res.cookie('auth', token);

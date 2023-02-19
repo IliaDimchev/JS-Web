@@ -45,7 +45,6 @@ router.get('/catalog/:photoId/details', async (req, res) => {
 
 router.post('/catalog/:photoId/details', isAuthorized, async (req, res) => {
     const comment = req.body.comment;
-    const photo = await photoService.getOne(req.params.photoId).populate('owner');
     await photoService.comment(req.user?._id, comment, req.params.photoId);
 
     res.redirect(`/catalog/${req.params.photoId}/details`);

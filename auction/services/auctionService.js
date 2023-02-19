@@ -17,7 +17,8 @@ exports.bid = async (userId, auctionId, newPrice) => {
 
 };
 
+exports.create = (author, bookData) => Auction.create({ ...bookData, author });
+
 exports.edit = (auctionId, auctionData) => Auction.findByIdAndUpdate(auctionId, auctionData, { runValidators: true });
 
-
-exports.create = (author, bookData) => Auction.create({ ...bookData, author });
+exports.delete = (auctionId) => Auction.findByIdAndDelete(auctionId);

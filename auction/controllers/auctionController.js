@@ -18,7 +18,10 @@ router.get('/catalog/:auctionId/details', async (req, res) => {
     const isAuthor = auction.author._id.toString() === req.user?._id;
     const isBidder = auction.bidders == req.user?._id
     const bidders = auction.bidders
-    const highestBidder = `${auction.bidders.firstName} ${auction.bidders.lastName}`
+    let highestBidder = '';
+    if(auction.bidders){
+        highestBidder = `${auction.bidders.firstName} ${auction.bidders.lastName}`;
+    }
 
     auction.category = categoryMap[auction.category];
 
@@ -61,9 +64,16 @@ router.post('/catalog/:auctionId/edit', isAuthorized, async (req, res) => {
     res.redirect(`/catalog/${req.params.auctionId}/details`);
 });
 
+router.get('/catalog/:auctionId/delete', isAuthorized, async (req, res) => {
+    await auctionService.delete(req.params.auctionId);
+
+    res.redirect('/catalog');
+});
+
 router.get('/create', isAuthorized, (req, res) => {
     res.render('auction/create');
 });
+
 
 router.post('/create', isAuthorized, async (req, res) => {
     const auctionData = req.body;

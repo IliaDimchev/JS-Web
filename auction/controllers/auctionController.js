@@ -53,12 +53,12 @@ router.get('/catalog/:auctionId/edit', isAuthorized, async (req, res) => {
     res.render('auction/edit', { auction, category, bidder });
 });
 
-router.post('/:cryptoId/edit', isAuthorized, async (req, res) => {
-    const cryptoData = req.body;
+router.post('/catalog/:auctionId/edit', isAuthorized, async (req, res) => {
+    const auctionData = req.body;
 
-    await cryptoService.edit(req.params.cryptoId, cryptoData);
+    await auctionService.edit(req.params.auctionId, auctionData);
 
-    res.redirect(`/crypto/${req.params.cryptoId}/details`);
+    res.redirect(`/catalog/${req.params.auctionId}/details`);
 });
 
 router.get('/create', isAuthorized, (req, res) => {

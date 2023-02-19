@@ -12,6 +12,21 @@ router.get('/catalog', async (req, res) => {
     res.render('auction/catalog', { auctions });
 });
 
+router.get('/ended', async (req, res) => {
+    const allAuctions = await auctionService.getAll().populate('author');
+    let auctions = [];
+    for (auction in allAuctions){
+        if (allAuctions[auction].author._id.toString() == req.user._id){
+            if(allAuctions[auction].closed){
+                auctions.push(allAuctions[auction]);
+            }
+        }
+    }
+
+
+    res.render('auction/closed-auctions', { auctions });
+});
+
 router.get('/catalog/:auctionId/details', async (req, res) => {
     const auction = await auctionService.getOne(req.params.auctionId).populate('author').populate('bidders');
     const authorName = `${auction.author.firstName} ${auction.author.lastName}`
@@ -68,6 +83,18 @@ router.post('/catalog/:auctionId/edit', isAuthorized, async (req, res) => {
     await auctionService.edit(req.params.auctionId, auctionData);
 
     res.redirect(`/catalog/${req.params.auctionId}/details`);
+});
+
+router.get('/catalog/:auctionId/close', isAuthorized, async (req, res) => {
+    const auction = await auctionService.getOne(req.params.auctionId).populate('author');
+    if (req.user._id == auction.author._id.toString()){
+        await auctionService.close(req.params.auctionId);
+        res.redirect('/ended');
+    } else {
+        res.redirect('/');
+    }
+
+
 });
 
 router.get('/catalog/:auctionId/delete', isAuthorized, async (req, res) => {

@@ -5,11 +5,10 @@ exports.getAll = () => Photo.find({}).lean();
 exports.getOne = (photoId) => Photo.findById(photoId).lean();
 
 exports.comment = async (userId, comment, photoId) => {
-    const photo = await Crypto.findById(photoId);
-
+    const photo = await Photo.findById(photoId);
     photo.commentsList.push({userId, comment});
 
-    return crypto.save();
+    return photo.save();
 };
 
 exports.create = (ownerId, photoData) => Photo.create({ ...photoData, owner: ownerId });

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { isAuthorized } = require('../middlewares/authMiddleware');
 const photoService = require('../services/photoService');
+const authService = require('../services/authService');
 const { getErrorMessage } = require('../utils/errorUtils');
 
 router.get('/catalog', async (req, res) => {
@@ -8,6 +9,23 @@ router.get('/catalog', async (req, res) => {
 
 
     res.render('photo/catalog', { photos });
+});
+
+router.get('/profile', isAuthorized, async (req, res) => {
+    const allPhotos = await photoService.getAll().populate('owner');
+    // let photos = [];
+    let photos = [];
+
+    for (photo in allPhotos){
+        if (allPhotos[photo].owner._id.toString() == req.user._id){
+            photos.push(allPhotos[photo]);
+        }
+    }
+
+    const imagesCount = photos?.length;
+    
+    const user = await authService.getUserData(req.user?._id);
+    res.render('photo/profile', { photos, user, imagesCount });
 });
 
 router.get('/catalog/:photoId/details', async (req, res) => {
@@ -20,7 +38,7 @@ router.get('/catalog/:photoId/details', async (req, res) => {
     res.render('photo/details', { photo, isOwner, canComment });
 });
 
-router.post('catalog/:photoId/details', isAuthorized, async (req, res) => {
+router.post('catalog/:photoId', isAuthorized, async (req, res) => {
     try {
         const { comment } = req.body;
         console.log(comment);
@@ -29,8 +47,8 @@ router.post('catalog/:photoId/details', isAuthorized, async (req, res) => {
         return res.status(404).render('/home/404', { error: getErrorMessage(error) });
     }
 
-
-    res.redirect(`/catalog/${req.params.photoId}/details`);
+    res.redirect(`/catalog`);
+    // res.redirect(`/catalog/${req.params.photoId}/details`);
 });
 
 router.get('/catalog/:photoId/edit', isAuthorized, async (req, res) => {

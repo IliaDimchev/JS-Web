@@ -2,33 +2,33 @@ const mongoose = require('mongoose');
 
 const photoSchema = new mongoose.Schema({
     name: {
-        tyoe: String,
+        type: String,
         required: true,
     },
     image: {
-        tyoe: String,
+        type: String,
         required: true,
+        validate: /^http?s:\/\//,
     },
     age: {
-        tyoe: Number,
+        type: Number,
         required: true,
     },
     description: {
-        tyoe: String,
+        type: String,
         required: true,
     },
     location: {
-        tyoe: String,
+        type: String,
         required: true,
     },
-    commentList: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'User',
-    }],
+    // commentsList:{
+
+    // },
     owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
-    }
+    },
 });
 
 const Photo = mongoose.model('Photo', photoSchema);

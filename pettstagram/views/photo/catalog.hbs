@@ -1,13 +1,14 @@
 <div class="container">
     <div class="col-9">
         {{#if photos}}
+        {{#each photos}}
         <div class="card">
 
             <!-- Start User Details and Image Location -->
             <div class="top">
                 <div class="userDetails">
                     <!-- Link to User Profile Page -->
-                    <a href="#" action="#" method="#">
+                    <a href="/profile/{{owner._id}}" method="GET">
                         <div class="profilepic">
                             <div class="profile_img">
                                 <div class="image">
@@ -20,27 +21,28 @@
                         <!-- Link to User Profile Page -->
                         <p>
                             <!-- show user username -->
-                            MayaB
+                            {{owner.username}}
                         </p>
                         <!-- photo's location -->
-                        <span>Bansko, Bulgaria</span>
+                        <span>{{location}}</span>
                     </h3>
                 </div>
             </div>
 
             <!-- Start Pet Photo -->
             <div class="imgBx">
-                <img src="/static/images/axolotl.jpeg" alt="post" class="cover">
+                <img src="{{image}}" alt="post" class="cover">
             </div>
             <!-- Name of Pet -->
-            <h5 class="petName">Name: Sal</h5>
+            <h5 class="petName">Name: {{name}}</h5>
             <!-- Age of Pet -->
-            <h5 class="petAge">Age: 4</h5>
+            <h5 class="petAge">Age: {{age}}</h5>
             <!-- Link to Photo Details Page -->
-            <a href="#" id="see-details">
+            <a href="/catalog/{{_id}}/details" id="see-details">
                 <h4 class="details">See details</h4>
             </a>
         </div>
+        {{/each}}
         {{else}}
         <article class="not-available-photo">
             <h1>No photo posts yet.</h1>

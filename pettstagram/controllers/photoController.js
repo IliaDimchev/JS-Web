@@ -61,8 +61,13 @@ router.get('/catalog/:photoId/edit', isAuthorized, async (req, res) => {
 
 router.post('/catalog/:photoId/edit', isAuthorized, async (req, res) => {
     const photoData = req.body;
-
-    await photoService.edit(req.params.photoId, photoData);
+    const photo = await photoService.getOne(req.params.photoId).populate('owner');
+    
+    try {
+        await photoService.edit(req.params.photoId, photoData);
+    } catch (error) {
+        return res.status(400).render('photo/edit', { photo, error: getErrorMessage(error) });
+    }
 
     res.redirect(`/catalog/${req.params.photoId}/details`);
 });

@@ -32,22 +32,22 @@ comment on a photo post (if the current user is not the owner of the photo);
 delete or edit the photo depending on the user's authentication (only for the owner of the current blog).
 ## 4. Database Models
 The database of the Petstagram application needs to support two entities:
-User
-username – string (required)
-email – string (required)
-password – string (required)
- Photo
-name – string (required)
-image – string (required)
-age – number (required)
-description – string (required)
-location – string (required)
-commentList – an array of objects containing the user's ID and the comment content: [ { userID: '1234', comment: 'Nice photo!'} ]
-owner – object ID (a reference to the User model)
-Note:  When a user comments a photo, their ID is added to that collection (commentList)
-Implement the entities with the correct data types.
+1. User
+- username – string (required)
+- email – string (required)
+- password – string (required)
+2. Photo
+- name – string (required)
+- image – string (required)
+- age – number (required)
+- description – string (required)
+- location – string (required)
+- commentList – an array of objects containing the user's ID and the comment content: [ { userID: '1234', comment: 'Nice photo!'} ]
+- owner – object ID (a reference to the User model)
+#### Note:  When a user comments a photo, their ID is added to that collection (commentList)
+#### Implement the entities with the correct data types.
 ## 5. Application Pages (80 Pts)
-Home Page (Logged-in Users and Logged-out Users) 
+### Home Page (Logged-in Users and Logged-out Users) 
 Visualize static home page: 
 
 ### Register Page (Logged-out Users)
@@ -61,8 +61,8 @@ The logout action is available to logged-in users. Upon success, clear any sessi
 Catalog (Logged-in Users and Logged-out Users)
 List of all photo posts. Each post must display information about the pet image, the name, the age, the location, the owner's username, and a button for details about the specific photo. As in the picture below:
 
-The [See details] button should be a link to the details page for the current photo post.
-If there are NO photos in the database yet, display "No photo posts yet.".
+#### The [See details] button should be a link to the details page for the current photo post.
+#### If there are NO photos in the database yet, display "No photo posts yet.".
 
 
 

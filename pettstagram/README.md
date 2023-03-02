@@ -75,16 +75,16 @@ description
 location
 comments:
 buttons (depending on the status of the currently logged in user)
-- Details Page (Logged-out Users)
+### Details Page (Logged-out Users)
 If the user hasn’t logged in, no buttons should be displayed.
 
-- Details Page (Logged-in User and Creator of the Current Photo Post)
+### Details Page (Logged-in User and Creator of the Current Photo Post)
 If the currently logged-in user is the owner (the user who created the photo post), they should see the [Delete] and [Edit] buttons.
 
-- Details Page (Logged-in User Who is Not the Current Photo Owner)
+### Details Page (Logged-in User Who is Not the Current Photo Owner)
 If the currently logged-in user is not the owner (the creator of this photo post), they should see a comment text area.
 
-- Comment (Logged-in User Who is Not the Current Photo Owner)
+### Comment (Logged-in User Who is Not the Current Photo Owner)
 Any registered user who is not the owner of the current photo post should be able to comment on the photo. 
 When they click on [Post], their user ID and comment should be added to the commentList collection of the photo and the user should be redirected to the details page for the current photo post.
 Every logged-in user who is not the current photo owner can comment as many times as they want.
@@ -99,39 +99,39 @@ Each user can edit their photo posts. Clicking the [Edit] button for a specific 
 
 ## 6. Security Requirements / Routes Guards (10 Pts)
 The security requirements are mainly access requirements, i.e., configurations specifying which users can access specific functionalities and pages.
-Guest (not logged-in) users can access the home page.
-Guest (not logged-in) users can access the login page and functionality.
-Guest (not logged-in) users can access the register page and functionality.
-Guest (not logged-in) and users (logged-in) can access the catalog (a list of all photo posts).
-Guest (not logged-in) can access the details page without functionality.
-Users (logged-in) can access the home page.
-Users (logged-in) can access the details page and functionality.
-Users (not photo post owners) can comment on photos.
-Users (photo post owners) can edit and delete their photo posts.
-Users (logged-in) can access the profile page and functionality.
-Users (logged-in) can access the add photo page and functionality.
-Users (logged-in) can access the logout functionality.
-Use the following view for invalid paths:
+- Guest (not logged-in) users can access the home page.
+- Guest (not logged-in) users can access the login page and functionality.
+- Guest (not logged-in) users can access the register page and functionality.
+- Guest (not logged-in) and users (logged-in) can access the catalog (a list of all photo posts).
+- Guest (not logged-in) can access the details page without functionality.
+- Users (logged-in) can access the home page.
+- Users (logged-in) can access the details page and functionality.
+- Users (not photo post owners) can comment on photos.
+- Users (photo post owners) can edit and delete their photo posts.
+- Users (logged-in) can access the profile page and functionality.
+- Users (logged-in) can access the add photo page and functionality.
+- Users (logged-in) can access the logout functionality.
+- Use the following view for invalid paths: 404.hbs
 
 ## 7. Validation and Error Handling (10 Pts)
-The application should notify the users about the result of their actions.
-In case of an error, you should display a <div> with the class "errorContainer".
-You can choose to display the first error or all of them. You have complete freedom to choose the content of the error message you will display.
-Login / Register
-You should make the following validations:
-The username is required and should be at least 2 characters long.
-The email is required and should be at least 10 characters long.
-The password is required and should be at least 4 characters long.
-The repeat password is required and should be equal to the password.
+1. The application should notify the users about the result of their actions.
+2. In case of an error, you should display a <div> with the class "errorContainer".
+3. You can choose to display the first error or all of them. You have complete freedom to choose the content of the error message you will display.
+- Login / Register
+- You should make the following validations:
+- The username is required and should be at least 2 characters long.
+- The email is required and should be at least 10 characters long.
+- The password is required and should be at least 4 characters long.
+- The repeat password is required and should be equal to the password.
  
 
-Photo
-You should make the following validations while creating or editing a photo post:
-The name is required and should be at least 2 characters.
-The photo image is required and should start with http:// or https://
-The age is required and should be at least 1 and no longer than 100 characters.
-The description is required and should be at least 5 and no longer than 50 characters.
-The location is required and should be at least 5 and no longer than 50 characters.
+### Photo
+- You should make the following validations while creating or editing a photo post:
+- The name is required and should be at least 2 characters.
+- The photo image is required and should start with http:// or https://
+- The age is required and should be at least 1 and no longer than 100 characters.
+- The description is required and should be at least 5 and no longer than 50 characters.
+- The location is required and should be at least 5 and no longer than 50 characters.
 
 
 ## 8. * Bonus – Profile (10 Pts)

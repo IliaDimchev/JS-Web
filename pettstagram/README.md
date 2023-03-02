@@ -1,17 +1,17 @@
 # JS Back-End Exam – Petstagram
 1. Exam Rules
-1. You have 4 hours 
-2. When you are ready, delete the node_modules folder, make sure all dependencies are listed in the package.json file, and submit your archiving project.
-3. You are provided with HTML & CSS resources.
-4. You may add attributes (such as class and dataset), but it is forbidden to change existing attributes (such as class and id).
-5. You may change "href" attributes on links and add/change the method and action attributes of HTML forms.
-6. Use Express.js as a back-end framework.
-7. Use MongoDB as a database with mongoose.
-8. You can use whatever view engine you like (express-handlebars, EJS, Pug, etc.).
-9. Use bcrypt for hashing the password.
-10. The application must start from the file index.js on port 3000.
-11. It is forbidden to use React, Vue, Angular, etc.
-12. Only the last submission will be evaluated!
+- You have 4 hours 
+- When you are ready, delete the node_modules folder, make sure all dependencies are listed in the package.json file, and submit your archiving project.
+- You are provided with HTML & CSS resources.
+- You may add attributes (such as class and dataset), but it is forbidden to change existing attributes (such as class and id).
+- You may change "href" attributes on links and add/change the method and action attributes of HTML forms.
+- Use Express.js as a back-end framework.
+- Use MongoDB as a database with mongoose.
+- You can use whatever view engine you like (express-handlebars, EJS, Pug, etc.).
+- Use bcrypt for hashing the password.
+- The application must start from the file index.js on port 3000.
+- It is forbidden to use React, Vue, Angular, etc.
+- Only the last submission will be evaluated!
 2. Application Overview
 Get acquainted with the provided HTML and CSS and create an application for sharing pet photos. 
 The visitors can view the home page and catalog page with available photos. They can also register with a username and password. After registering, they will be able to create their photo posts and comment on photo posts they are interested in (if the current user is not the author of the photo). Authors can edit or delete posts at any time.

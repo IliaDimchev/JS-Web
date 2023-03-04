@@ -1,3 +1,9 @@
+const formatDate = (input) => {
+    const date = new Date(input);
+
+    return date.toLocaleDateString();
+}
+
 export const User = ({
     _id,
     firstName,
@@ -17,7 +23,7 @@ export const User = ({
             <td>{lastName}</td>
             <td>{email}</td>
             <td>{phoneNumber}</td>
-            <td>{createdAt}</td>
+            <td>{formatDate(createdAt)}</td>
 
             <td className="actions">
                 <button className="btn edit-btn" title="Edit">

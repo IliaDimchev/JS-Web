@@ -1,4 +1,4 @@
-const UserDetails = () => {
+export const UserDetails = () => {
     return (
         <div className="overlay">
             <div className="backdrop"></div>

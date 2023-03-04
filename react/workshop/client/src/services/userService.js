@@ -8,4 +8,3 @@ export const getAll = async () => {
     // return Object.values(result.users);
     return result.users;
 };
-};

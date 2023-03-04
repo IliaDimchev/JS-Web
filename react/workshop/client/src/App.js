@@ -9,10 +9,12 @@ import './App.css';
 import { UserList } from "./components/UserList";
 
 function App() {
-  useEffect(async = () =>{
-    const users = await userService.getAll();
+  useEffect(() =>{
+    async function getUsers () {
+      const users = await userService.getAll();
+    }
 
-    console.log(users);
+    getUsers();
   }, []);
 
   return (

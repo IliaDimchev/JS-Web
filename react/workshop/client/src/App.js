@@ -10,8 +10,10 @@ import { UserList } from "./components/UserList";
 
 function App() {
   useEffect(async = () =>{
-    await userService.getAll();
-  });
+    const users = await userService.getAll();
+
+    console.log(users);
+  }, []);
 
   return (
     <>

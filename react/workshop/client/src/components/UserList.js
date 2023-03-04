@@ -14,7 +14,7 @@ export const UserList = ({
 
     return (
         <>
-            {setSelectedUser && <UserDetails />}
+            {selectedUser && <UserDetails />}
             <div className="table-wrapper">
                 {/* <div className="loading-shade">
                 <div className="spinner"></div>
@@ -128,7 +128,7 @@ export const UserList = ({
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map(u => <User key={u._id} {...u}  onInfoClic={onInfoClick}/>)}
+                        {users.map(u => <User key={u._id} {...u}  onInfoClick={onInfoClick}/>)}
                     </tbody>
                 </table>
             </div>

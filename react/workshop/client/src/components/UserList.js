@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import * as userService from '../services/userService';
+
 import { User } from "./User";
 import { UserDetails } from "./UserDetails";
 
@@ -8,13 +10,15 @@ export const UserList = ({
 }) => {
     const [selectedUser, setSelectedUser] = useState(null);
 
-    const onInfoClick = (userId) => {
-        setSelectedUser(userId);
+    const onInfoClick = async (userId) => {
+        const user = await userService.getOne(userId);
+
+        setSelectedUser(user);
     };
 
     return (
         <>
-            {selectedUser && <UserDetails />}
+            {selectedUser && <UserDetails {...selectedUser} />}
             <div className="table-wrapper">
                 {/* <div className="loading-shade">
                 <div className="spinner"></div>

@@ -11,6 +11,7 @@ export const User = ({
     email,
     imageUrl,
     createdAt,
+    updatedAt,
     phoneNumber,
     onInfoClick
 }) => {

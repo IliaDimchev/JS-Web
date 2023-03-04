@@ -1,8 +1,4 @@
-const formatDate = (input) => {
-    const date = new Date(input);
-
-    return date.toLocaleDateString();
-}
+import { formatDate } from "../utils/dateUtils";
 
 export const User = ({
     _id,
@@ -11,7 +7,6 @@ export const User = ({
     email,
     imageUrl,
     createdAt,
-    updatedAt,
     phoneNumber,
     onInfoClick
 }) => {

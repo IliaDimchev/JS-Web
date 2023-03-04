@@ -22,7 +22,7 @@ function App() {
       // Short-hand syntax
       // .then(setUsers)
       .then(users => {
-        setUsers[users];
+        setUsers(users);
       })
       .catch(err => {
         console.log(err.message);
@@ -36,7 +36,7 @@ function App() {
         <section className="card users-container">
           <Search />
 
-          <UserList />
+          <UserList users={users} />
         </section>
       </main>
       <Footer />

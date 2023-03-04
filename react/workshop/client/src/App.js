@@ -10,11 +10,19 @@ import { UserList } from "./components/UserList";
 
 function App() {
   useEffect(() =>{
-    async function getUsers () {
-      const users = await userService.getAll();
-    }
+    // async function getUsers () {
+    //   const users = await userService.getAll();
+    // }
 
-    getUsers();
+    // getUsers();
+
+    userService.getAll()
+      .then(users => {
+        console.log(users);
+      })
+      .catch(err => {
+        console.log('Error' + err);
+      });
   }, []);
 
   return (

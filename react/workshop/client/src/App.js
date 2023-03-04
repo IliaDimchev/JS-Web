@@ -5,7 +5,11 @@ function App() {
   return (
     <>
       <Header />
+      <main class="main">
+        <section class="card users-container">
 
+        </section>
+      </main>
       <Footer />
     </>
   );

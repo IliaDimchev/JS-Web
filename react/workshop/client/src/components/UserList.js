@@ -1,7 +1,7 @@
 export const UserList = () => {
     return (
         <div className="table-wrapper">
-            <div className="loading-shade">
+            {/* <div className="loading-shade">
                 <div className="spinner"></div>
                 <div className="table-overlap">
                     <svg
@@ -60,7 +60,7 @@ export const UserList = () => {
                     </svg>
                     <h2>Failed to fetch</h2>
                 </div>
-                </div>
+                </div> */}
 
             <table className="table">
                 <thead>

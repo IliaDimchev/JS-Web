@@ -21,7 +21,7 @@ function App() {
         console.log(users);
       })
       .catch(err => {
-        console.log('Error' + err);
+        console.log(err.message);
       });
   }, []);
 

@@ -1,4 +1,4 @@
-import { formatDate } from "../utils/dateUtils";
+import { formatDate } from "../../utils/dateUtils";
 
 export const User = ({
     _id,

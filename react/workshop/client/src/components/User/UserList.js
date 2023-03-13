@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import * as userService from '../services/userService';
+import * as userService from '../../services/userService';
 
 import { User } from "./User/User";
 import { UserDetails } from "./User/UserDetails";

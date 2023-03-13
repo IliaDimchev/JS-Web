@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import * as userService from './services/userService';
 
-import { Footer } from "./components/Footer";
+import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header";
 import { Search } from "./components/Search";
 import './App.css';

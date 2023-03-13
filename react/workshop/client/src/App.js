@@ -7,41 +7,44 @@ import { Header } from "./components/Header";
 import { Search } from "./components/Search";
 import './App.css';
 import { UserList } from "./components/UserList";
+import { AddUser } from "./components/AddUser";
 
 function App() {
-  const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState([]);
 
-  useEffect(() =>{
-    // async function getUsers () {
-    //   const users = await userService.getAll();
-    // }
+    useEffect(() => {
+      // async function getUsers () {
+      //   const users = await userService.getAll();
+      // }
 
-    // getUsers();
+      // getUsers();
 
-    userService.getAll()
-      // Short-hand syntax
-      // .then(setUsers)
-      .then(users => {
-        setUsers(users);
-      })
-      .catch(err => {
-        console.log(err.message);
-      });
-  }, []);
+      userService.getAll()
+        // Short-hand syntax
+        // .then(setUsers)
+        .then(users => {
+          setUsers(users);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    }, []);
 
-  return (
-    <>
-      <Header />
-      <main className="main">
-        <section className="card users-container">
-          <Search />
+    return (
+      <>
+        <Header />
+        <main className="main">
+          <section className="card users-container">
+            <Search />
 
-          <UserList users={users} />
-        </section>
-      </main>
-      <Footer />
-    </>
-  );
-}
+            <UserList users={users} />
+
+            <AddUser />
+          </section>
+        </main>
+        <Footer />
+      </>
+    );
+  }
 
 export default App;

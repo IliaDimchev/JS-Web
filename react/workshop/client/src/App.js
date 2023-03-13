@@ -6,8 +6,8 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Search } from "./components/Search";
 import './App.css';
-import { UserList } from "./components/UserList";
-import { AddUser } from "./components/AddUser";
+import { UserList } from "./components/User/UserList";
+import { AddUser } from "./components/User/AddUser";
 
 function App() {
     const [users, setUsers] = useState([]);

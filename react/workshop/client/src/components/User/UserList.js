@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import * as userService from '../../services/userService';
 
-import { User } from "./User/User";
-import { UserDetails } from "./User/UserDetails";
+import { User } from "./User";
+import { UserDetails } from "./UserDetails";
 
 export const UserList = ({
     users,

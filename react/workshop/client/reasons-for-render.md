@@ -3,3 +3,4 @@
 2. Parent rerender
 3. Props changed
 4. Hooks changed
+* Every time we set a new state, we set a new reference

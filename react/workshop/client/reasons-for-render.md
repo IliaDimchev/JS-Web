@@ -5,3 +5,4 @@
 4. Hooks changed
 * Every time we set a new state, we set a new reference
 * Never modify the state, always pass a new reference
+* Props down, callbacks up

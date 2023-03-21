@@ -1,21 +1,49 @@
-export const Details = () => {
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import * as gameService from '../../services/gameService';
+import * as commentSevice from '../../services/commentService';
+
+export const GameDetails = () => {
+    const [username, setUsername] = useState('');
+    const [commment, setCommment] = useState('');
+    const { gameId } = useParams();
+    const [game, setGame] = useState({});
+
+    useEffect(() => {
+        gameService.getOne(gameId)
+            .then(result => {
+                setGame(result);
+            });
+    }, [gameId]);
+
+    const onCommentSubmit = async (e) => {
+        e.preventDefault();
+
+        await commentSevice.create({
+            gameId,
+            username,
+            comment
+        });
+
+        setUsername('');
+        setCommment('');
+    };
+
     return (
         <section id="game-details">
             <h1>Game Details</h1>
             <div className="info-section">
 
                 <div className="game-header">
-                    <img className="game-img" src="images/MineCraft.png" />
-                    <h1>Bright</h1>
-                    <span className="levels">MaxLevel: 4</span>
-                    <p className="type">Action, Crime, Fantasy</p>
+                    <img className="game-img" src={game.imageUrl} />
+                    <h1>{game.title}</h1>
+                    <span className="levels">MaxLevel: {game.maxLevel}</span>
+                    <p className="type">{game.category}</p>
                 </div>
 
                 <p className="text">
-                    Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work
-                    with an Orc to find a weapon everyone is prepared to kill for. Set in a world where fantasy
-                    creatures live side by side with humans. A human cop is forced
-                    to work with an Orc to find a weapon everyone is prepared to kill for.
+                    {game.summary}
                 </p>
 
                 {/* <!-- Bonus ( for Guests and Users ) --> */}
@@ -45,8 +73,9 @@ export const Details = () => {
             {/* <!-- Add Comment ( Only for logged-in users, which is not creators of the current game ) --> */}
             <article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form">
-                    <textarea name="comment" placeholder="Comment......"></textarea>
+                <form className="form" onSubmit={onCommentSubmit}>
+                    <input type='text' name='username' placeholder='Username..' value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <textarea name="comment" placeholder="Comment......" value={comment} onChange={(e) => setUsername(e.target.value)}></textarea>
                     <input className="btn submit" type="submit" value="Add Comment" />
                 </form>
             </article>

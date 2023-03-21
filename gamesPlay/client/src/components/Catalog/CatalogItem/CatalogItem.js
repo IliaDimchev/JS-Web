@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
+
 export const CatalogItem = ({
     title,
     imageUrl,
-    category   
+    category,
+    _id
 }) => {
     return (
         <div className="allGames">
@@ -9,7 +12,7 @@ export const CatalogItem = ({
                 <img src={imageUrl} />
                 <h6>{category}</h6>
                 <h2>{title}</h2>
-                <a href="#" className="details-button">Details</a>
+                <Link to={`/catalog/${_id}`} className="details-button">Details</Link>
             </div>
         </div>
     );

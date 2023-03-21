@@ -6,7 +6,7 @@ import * as commentSevice from '../../services/commentService';
 
 export const GameDetails = () => {
     const [username, setUsername] = useState('');
-    const [commment, setCommment] = useState('');
+    const [comment, setComment] = useState('');
     const { gameId } = useParams();
     const [game, setGame] = useState({});
 
@@ -27,7 +27,7 @@ export const GameDetails = () => {
         });
 
         setUsername('');
-        setCommment('');
+        setComment('');
     };
 
     return (
@@ -75,7 +75,7 @@ export const GameDetails = () => {
                 <label>Add new comment:</label>
                 <form className="form" onSubmit={onCommentSubmit}>
                     <input type='text' name='username' placeholder='Username..' value={username} onChange={(e) => setUsername(e.target.value)} />
-                    <textarea name="comment" placeholder="Comment......" value={comment} onChange={(e) => setUsername(e.target.value)}></textarea>
+                    <textarea name="comment" placeholder="Comment......" value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
                     <input className="btn submit" type="submit" value="Add Comment" />
                 </form>
             </article>

@@ -24,8 +24,10 @@ function App() {
             });
     }, []);
 
-    const onCreateGameSubmit = (data) => {
+    const onCreateGameSubmit = async (data) => {
+        console.log(data);
 
+        const newGame = await gameService.create(data);
     };
 
     return (
@@ -36,7 +38,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />}></Route>
                     <Route path='/catalog' element={<Catalog games={games} />}></Route>
-                    <Route path='/create-game' element={<CreateGame />}></Route>
+                    <Route path='/create-game' element={<CreateGame onCreateGameSubmit={onCreateGameSubmit}/>}></Route>
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/register' element={<Register />}></Route>
                 </Routes>

@@ -6,7 +6,7 @@ export const CreateGame = ({
     const [values, setValues] = useState({
         title: '',
         category: '',
-        maxLevel: null,
+        maxLevel: '',
         imageUrl: '',
         summary: '',
     });
@@ -15,9 +15,9 @@ export const CreateGame = ({
         setValues(state => ({...state, [e.target.name]: e.target.value}));
     };
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        
+
         onCreateGameSubmit(values);
     };
 

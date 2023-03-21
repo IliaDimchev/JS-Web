@@ -1,4 +1,4 @@
-export const Create = () => {
+export const CreateGame = () => {
     return (
         <section id="create-page" className="auth">
             <form id="create">

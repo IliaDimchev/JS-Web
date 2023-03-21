@@ -1,5 +1,7 @@
+import { Routes, Route } from 'react-router-dom';
+
 import { Catalog } from "./components/Catalog/Catalog";
-import { Create } from "./components/Create/Create";
+import { CreateGame } from "./components/CreateGame/CreateGame";
 import { Details } from "./components/Details/Details";
 import { Edit } from "./components/Edit/Edit";
 import { Footer } from "./components/Footer/Footer";
@@ -15,7 +17,13 @@ function App() {
             <Header />
 
             <main id="main-content">
-                
+                <Routes>
+                    <Route path='/' element={<Home />}></Route>
+                    <Route path='/catalog' element={<Catalog />}></Route>
+                    <Route path='/create' element={<CreateGame />}></Route>
+                    <Route path='/login' element={<Login />}></Route>
+                    <Route path='/register' element={<Register />}></Route>
+                </Routes>
             </main>
 
             <Footer />

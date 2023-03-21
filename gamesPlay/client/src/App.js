@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import * as gameService from './services/gameService';
 
@@ -15,6 +15,7 @@ import { Register } from "./components/Register/Register";
 
 
 function App() {
+    const navigate = useNavigate();
     const [games, setGames] = useState([]);
 
     useEffect(() => {
@@ -25,9 +26,11 @@ function App() {
     }, []);
 
     const onCreateGameSubmit = async (data) => {
-        console.log(data);
-
         const newGame = await gameService.create(data);
+
+        setGames(state => [...state, newGame]);
+
+        navigate('/catalog');
     };
 
     return (

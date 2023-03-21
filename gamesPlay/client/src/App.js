@@ -5,7 +5,7 @@ import * as gameService from './services/gameService';
 
 import { Catalog } from "./components/Catalog/Catalog";
 import { CreateGame } from "./components/CreateGame/CreateGame";
-import { Details } from "./components/Details/Details";
+import { GameDetails } from "./components/GameDetails/GameDetails";
 import { Edit } from "./components/Edit/Edit";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
@@ -41,6 +41,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />}></Route>
                     <Route path='/catalog' element={<Catalog games={games} />}></Route>
+                    <Route path='/catalog/:gameId' element={<GameDetails />}></Route>
                     <Route path='/create-game' element={<CreateGame onCreateGameSubmit={onCreateGameSubmit}/>}></Route>
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/register' element={<Register />}></Route>

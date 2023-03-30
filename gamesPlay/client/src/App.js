@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
+import { AuthContext } from './contexts/AuthContext';
 import * as gameService from './services/gameService';
 
 import { Catalog } from "./components/Catalog/Catalog";
@@ -39,22 +40,24 @@ function App() {
     }
 
     return (
-        <div id="box">
-            <Header />
+        <AuthContext.Provider value={{onLoginSubmit}}>
+            <div id="box">
+                <Header />
 
-            <main id="main-content">
-                <Routes>
-                    <Route path='/' element={<Home />}></Route>
-                    <Route path='/catalog' element={<Catalog games={games} />}></Route>
-                    <Route path='/catalog/:gameId' element={<GameDetails />}></Route>
-                    <Route path='/create-game' element={<CreateGame onCreateGameSubmit={onCreateGameSubmit}/>}></Route>
-                    <Route path='/login' element={<Login />}></Route>
-                    <Route path='/register' element={<Register />}></Route>
-                </Routes>
-            </main>
+                <main id="main-content">
+                    <Routes>
+                        <Route path='/' element={<Home />}></Route>
+                        <Route path='/catalog' element={<Catalog games={games} />}></Route>
+                        <Route path='/catalog/:gameId' element={<GameDetails />}></Route>
+                        <Route path='/create-game' element={<CreateGame onCreateGameSubmit={onCreateGameSubmit} />}></Route>
+                        <Route path='/login' element={<Login />}></Route>
+                        <Route path='/register' element={<Register />}></Route>
+                    </Routes>
+                </main>
 
-            <Footer />
-        </div>
+                <Footer />
+            </div>
+        </AuthContext.Provider>
     );
 }
 

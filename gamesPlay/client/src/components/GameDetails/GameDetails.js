@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import * as gameService from '../../services/gameService';
-import * as commentSevice from '../../services/commentService';
+// import * as commentSevice from '../../services/commentService';
 
 export const GameDetails = () => {
     const [username, setUsername] = useState('');
     const [comment, setComment] = useState('');
-    const [comments, setCommnets] = useState([]);
+    // const [comments, setCommnets] = useState([]);
     const { gameId } = useParams();
     const [game, setGame] = useState({});
 
@@ -15,21 +15,22 @@ export const GameDetails = () => {
         gameService.getOne(gameId)
             .then(result => {
                 setGame(result);
-                return commentSevice.getAll(gameId);
+                // return commentSevice.getAll(gameId);
             })
-            .then(result => {
-                setCommnets(result);
-            });
+            // .then(result => {
+            //     setCommnets(result);
+            // });
     }, [gameId]);
 
     const onCommentSubmit = async (e) => {
         e.preventDefault();
 
-        await commentSevice.create({
-            gameId,
+        const result = await gameService.addComment(gameId, {
             username,
             comment
         });
+
+        setGame(state => ({...state, comments: {...state.comments, [result._id]: result}}));
 
         setUsername('');
         setComment('');
@@ -54,15 +55,15 @@ export const GameDetails = () => {
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
-                        {comments.map(comment => (
+                        {game.comments && Object.values(game.comments).map(comment => (
                             <li key={comment._id} className="comment">
                                 <p>{comment.username}: {comment.comment}</p>
                             </li>
                         ))}
                     </ul>
-                    {comments.length === 0 && (
+                    {/* {!Object.values(game.comments).length && (
                         <p className="no-comment">No comments.</p>
-                    )}
+                    )} */}
                 </div>
 
                 {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}

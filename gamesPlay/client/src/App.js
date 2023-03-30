@@ -17,6 +17,7 @@ import { Register } from "./components/Register/Register";
 function App() {
     const navigate = useNavigate();
     const [games, setGames] = useState([]);
+    const [auth, setAuth] = useState({});
 
     useEffect(() => {
         gameService.getAll()
@@ -32,6 +33,10 @@ function App() {
 
         navigate('/catalog');
     };
+
+    const onLoginSubmit = async (data) => {
+        console.log(data);
+    }
 
     return (
         <div id="box">

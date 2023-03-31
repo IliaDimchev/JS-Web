@@ -14,6 +14,7 @@ import { Header } from "./components/Header/Header";
 import { Home } from "./components/Home/Home";
 import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
+import { Logout } from './components/Logout/Logout';
 
 
 function App() {
@@ -65,9 +66,16 @@ function App() {
         }
     }
 
+    const onLogout = async () => {
+        await authService.Logout();
+
+        setAuth({});
+    };
+
     const context = {
         onLoginSubmit,
         onRegisterSubmit,
+        onLogout,
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,
@@ -85,7 +93,8 @@ function App() {
                         <Route path='/catalog' element={<Catalog games={games} />}></Route>
                         <Route path='/catalog/:gameId' element={<GameDetails />}></Route>
                         <Route path='/create-game' element={<CreateGame onCreateGameSubmit={onCreateGameSubmit} />}></Route>
-                        <Route path='/login' element={<Login />}></Route>
+                        <Route path='/login' element={<Login />}></Route> 
+                        <Route path='/logout' element={<Logout />}></Route>
                         <Route path='/register' element={<Register />}></Route>
                     </Routes>
                 </main>

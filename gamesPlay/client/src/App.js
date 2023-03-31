@@ -37,9 +37,15 @@ function App() {
     };
 
     const onLoginSubmit = async (data) => {
-        const resutl = await authService.login(data);
+        try {
+            const result = await authService.login(data);
 
-        console.log(resutl);
+            setAuth(result);
+
+            navigate('/catalog');
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (

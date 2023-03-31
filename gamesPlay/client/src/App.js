@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from './contexts/AuthContext';
 import * as gameService from './services/gameService';
+import * as authService from './services/authService';
 
 import { Catalog } from "./components/Catalog/Catalog";
 import { CreateGame } from "./components/CreateGame/CreateGame";
@@ -36,7 +37,9 @@ function App() {
     };
 
     const onLoginSubmit = async (data) => {
-        console.log(data);
+        const resutl = await authService.login(data);
+
+        console.log(resutl);
     }
 
     return (

@@ -67,7 +67,7 @@ function App() {
     }
 
     const onLogout = async () => {
-        await authService.Logout();
+        // await authService.logout();
 
         setAuth({});
     };

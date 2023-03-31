@@ -49,8 +49,13 @@ function App() {
     }
 
     const onRegisterSubmit = async (values) => {
+        const { confirmPassword, ...registerData } = values;
+        if (confirmPassword !== registerData.password) {
+            return;
+        };
+
         try {
-            const result = await authService.register(values);
+            const result = await authService.register(registerData);
 
             setAuth(result);
 
@@ -65,7 +70,7 @@ function App() {
         onRegisterSubmit,
         userId: auth._id,
         token: auth.accessToken,
-        userEmail: auth.email,   
+        userEmail: auth.email,
         isAuthenticated: !!auth.accessToken,
     };
 

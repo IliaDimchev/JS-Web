@@ -48,8 +48,21 @@ function App() {
         }
     }
 
+    const onRegisterSubmit = async (values) => {
+        try {
+            const result = await authService.register(values);
+
+            setAuth(result);
+
+            navigate('/catalog');
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const context = {
         onLoginSubmit,
+        onRegisterSubmit,
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,   

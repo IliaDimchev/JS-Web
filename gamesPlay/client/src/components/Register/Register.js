@@ -1,4 +1,17 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+
+import { useForm } from "../../hooks/useForm";
+import { AuthContext } from "../../contexts/AuthContext";
+
 export const Register = () => {
+    const { onRegisterSubmit } = useContext(AuthContext);
+    const { values, changeHandler, onSubmit } = useForm({
+        email: '',
+        password: '',
+        confirmPassword: '',
+    }, onRegisterSubmit);
+
     return (
         <section id="register-page" className="content auth">
             <form id="register">
@@ -13,12 +26,12 @@ export const Register = () => {
                     <input type="password" name="password" id="register-password" />
 
                     <label htmlFor="con-pass">Confirm Password:</label>
-                    <input type="password" name="confirm-password" id="confirm-password" />
+                    <input type="password" name="confirmPassword" id="confirm-password" />
 
                     <input className="btn submit" type="submit" value="Register" />
 
                     <p className="field">
-                        <span>If you already have profile click <a href="#">here</a></span>
+                        <span>If you already have profile click <Link to="/login">here</Link></span>
                     </p>
                 </div>
             </form>

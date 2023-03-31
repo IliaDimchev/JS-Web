@@ -53,9 +53,7 @@ function App() {
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,   
-        isAuthenticated() {
-            return !!auth.accessToken
-        },
+        isAuthenticated: !!auth.accessToken,
     };
 
     return (

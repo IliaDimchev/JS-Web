@@ -1,9 +1,10 @@
 const request = async (method, token, url, data) => {
     const options = {};
 
+    
     if (method !== 'GET') {
         options.method = method;
-
+        
         if (data) {
             options.headers = {
                 'Content-Type': 'application/json',
@@ -11,7 +12,14 @@ const request = async (method, token, url, data) => {
             options.body = JSON.stringify(data);
         };
     };
-
+    
+    if (token) {
+        options.headers = {
+            ...options.headers,
+            'X-Authorization': token,
+        };
+    };
+     
     const response = await fetch(url, options);
 
     if (response.status === 204) {

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useService } from '../../hooks/useService';
 
 import { gameServiceFactory } from '../../services/gameService';
@@ -15,6 +15,7 @@ export const GameDetails = () => {
     const [game, setGame] = useState({});
     const gameService = useService(gameServiceFactory);
     const commentService = useService(commentServiceFactory);
+    const navigate = useNavigate();
 
     useEffect(() => {
         gameService.getOne(gameId)
@@ -42,6 +43,12 @@ export const GameDetails = () => {
     };
 
     const isOwner = game._ownerId === userId;
+
+    const onDeleteClick = async () => {
+        await gameService.delete(game._id);
+
+        navigate('/commutes');
+    };
 
     return (
         <section id="game-details">
@@ -76,7 +83,7 @@ export const GameDetails = () => {
                 {isOwner && (
                     <div className="buttons">
                         <a href="#" className="button">Edit</a>
-                        <a href="#" className="button">Delete</a>
+                        <button className="button" onClick={onDeleteClick}>Delete</button>
                     </div>
                 )}
             </div>

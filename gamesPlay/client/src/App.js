@@ -4,6 +4,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
 import { gameServiceFactory } from './services/gameService';
 import * as authService from './services/authService';
+import { useService } from './hooks/useService';
 
 import { Catalog } from "./components/Catalog/Catalog";
 import { CreateGame } from "./components/CreateGame/CreateGame";

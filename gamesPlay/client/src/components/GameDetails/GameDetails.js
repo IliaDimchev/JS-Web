@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useService } from '../../hooks/useService';
 
-import * as gameService from '../../services/gameService';
+import { gameServiceFactory } from '../../services/gameService';
 // import * as commentSevice from '../../services/commentService';
 
 export const GameDetails = () => {
@@ -10,6 +11,7 @@ export const GameDetails = () => {
     // const [comments, setCommnets] = useState([]);
     const { gameId } = useParams();
     const [game, setGame] = useState({});
+    const gameService = useService(gameServiceFactory);
 
     useEffect(() => {
         gameService.getOne(gameId)
@@ -17,9 +19,9 @@ export const GameDetails = () => {
                 setGame(result);
                 // return commentSevice.getAll(gameId);
             })
-            // .then(result => {
-            //     setCommnets(result);
-            // });
+        // .then(result => {
+        //     setCommnets(result);
+        // });
     }, [gameId]);
 
     const onCommentSubmit = async (e) => {
@@ -30,7 +32,7 @@ export const GameDetails = () => {
             comment
         });
 
-        setGame(state => ({...state, comments: {...state.comments, [result._id]: result}}));
+        setGame(state => ({ ...state, comments: { ...state.comments, [result._id]: result } }));
 
         setUsername('');
         setComment('');

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from './contexts/AuthContext';
-import * as gameService from './services/gameService';
+import { gameServiceFactory } from './services/gameService';
 import * as authService from './services/authService';
 
 import { Catalog } from "./components/Catalog/Catalog";
@@ -21,6 +21,7 @@ function App() {
     const navigate = useNavigate();
     const [games, setGames] = useState([]);
     const [auth, setAuth] = useState({});
+    const gameService = useService(gameServiceFactory);
 
     useEffect(() => {
         gameService.getAll()
@@ -93,7 +94,7 @@ function App() {
                         <Route path='/catalog' element={<Catalog games={games} />}></Route>
                         <Route path='/catalog/:gameId' element={<GameDetails />}></Route>
                         <Route path='/create-game' element={<CreateGame onCreateGameSubmit={onCreateGameSubmit} />}></Route>
-                        <Route path='/login' element={<Login />}></Route> 
+                        <Route path='/login' element={<Login />}></Route>
                         <Route path='/logout' element={<Logout />}></Route>
                         <Route path='/register' element={<Register />}></Route>
                     </Routes>

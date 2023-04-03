@@ -30,10 +30,10 @@ export const gameServiceFactory = (token) => {
         return result;
     };
 
-    return (
+    return {
         getAll,
         getOne,
         create,
         addComment
-    );
+    };
 };

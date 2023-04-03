@@ -47,7 +47,7 @@ export const GameDetails = () => {
     const onDeleteClick = async () => {
         await gameService.delete(game._id);
 
-        navigate('/commutes');
+        navigate('/catalog');
     };
 
     return (

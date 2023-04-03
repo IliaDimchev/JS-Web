@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from './contexts/AuthContext';
 import { gameServiceFactory } from './services/gameService';
-import * as authService from './services/authService';
+import { authServiceFactory } from './services/authService';
 import { useService } from './hooks/useService';
 
 import { Catalog } from "./components/Catalog/Catalog";
@@ -23,6 +23,7 @@ function App() {
     const [games, setGames] = useState([]);
     const [auth, setAuth] = useState({});
     const gameService = useService(gameServiceFactory);
+    const authService = useService(authServiceFactory);
 
     useEffect(() => {
         gameService.getAll()

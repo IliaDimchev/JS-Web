@@ -6,7 +6,11 @@ import { gameServiceFactory } from '../../services/gameService';
 import { commentServiceFactory } from '../../services/commentService';
 import { AuthContext } from '../../contexts/AuthContext';
 
-export const GameDetails = () => {
+
+
+export const GameDetails = ({
+    setDeletedGame,
+}) => {
     const { userId } = useContext(AuthContext);
     const [username, setUsername] = useState('');
     const [comment, setComment] = useState('');
@@ -46,6 +50,8 @@ export const GameDetails = () => {
 
     const onDeleteClick = async () => {
         await gameService.delete(game._id);
+
+        setDeletedGame(game);
 
         navigate('/catalog');
     };

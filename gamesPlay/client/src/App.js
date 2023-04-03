@@ -16,11 +16,13 @@ import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
 import { Logout } from './components/Logout/Logout';
 
+export const deletedGame = false;
 
 function App() {
     const navigate = useNavigate();
     const [games, setGames] = useState([]);
     const [auth, setAuth] = useState({});
+    const [deletedGame, setDeletedGame] = useState({});
     const gameService = gameServiceFactory(auth.accessToken);
     const authService = authServiceFactory(auth.accessToken);
 
@@ -29,7 +31,7 @@ function App() {
             .then(result => {
                 setGames(result);
             });
-    }, []);
+    }, [deletedGame]);
 
     const onCreateGameSubmit = async (data) => {
         const newGame = await gameService.create(data);
@@ -93,7 +95,7 @@ function App() {
                     <Routes>
                         <Route path='/' element={<Home />}></Route>
                         <Route path='/catalog' element={<Catalog games={games} />}></Route>
-                        <Route path='/catalog/:gameId' element={<GameDetails />}></Route>
+                        <Route path='/catalog/:gameId' element={<GameDetails setDeletedGame={setDeletedGame} />}></Route>
                         <Route path='/create-game' element={<CreateGame onCreateGameSubmit={onCreateGameSubmit} />}></Route>
                         <Route path='/login' element={<Login />}></Route>
                         <Route path='/logout' element={<Logout />}></Route>

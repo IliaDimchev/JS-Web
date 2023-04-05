@@ -11,6 +11,7 @@ export const Edit = ({
     const { gameId } = useParams();
     const gameService = useService(gameServiceFactory);
     const { values, changeHandler, onSubmit, changeValues } = useForm({
+        _id:'',
         title: '',
         category: '',
         maxLevel: '',
@@ -23,7 +24,7 @@ export const Edit = ({
             .then(result => {
                 changeValues(result);
             });
-    }, []);
+    }, [gameId]);
 
     return (
         <section id="edit-page" className="auth">

@@ -76,6 +76,14 @@ function App() {
         setAuth({});
     };
 
+    const onGameEditSubmit = async (values) => {
+        const result = await gameService.edit(values._id, values);
+
+        //TODO Change State!!!
+
+        navigate(`/catalog/${values._id}`);
+    };
+
     const context = {
         onLoginSubmit,
         onRegisterSubmit,
@@ -96,7 +104,7 @@ function App() {
                         <Route path='/' element={<Home />}></Route>
                         <Route path='/catalog' element={<Catalog games={games} />}></Route>
                         <Route path='/catalog/:gameId' element={<GameDetails setDeletedGame={setDeletedGame} />}></Route>
-                        <Route path='/catalog/:gameId/edit' element={<Edit />}></Route>
+                        <Route path='/catalog/:gameId/edit' element={<Edit onGameEditSubmit={onGameEditSubmit} />}></Route>
                         <Route path='/create-game' element={<CreateGame onCreateGameSubmit={onCreateGameSubmit} />}></Route>
                         <Route path='/login' element={<Login />}></Route>
                         <Route path='/logout' element={<Logout />}></Route>

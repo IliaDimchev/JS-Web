@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState , useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { authServiceFactory } from '../services/authService';
@@ -26,6 +26,7 @@ export const AuthProvider = ({
     }
 
     const onRegisterSubmit = async (values) => {
+        // Password matching should be done in validator function
         const { confirmPassword, ...registerData } = values;
         if (confirmPassword !== registerData.password) {
             return;
@@ -65,4 +66,10 @@ export const AuthProvider = ({
             </AuthContext.Provider>
         </>
     );
+};
+
+export const useAuthContext = () => {
+    const context = useContext(AuthContext);
+    
+    return context;
 };

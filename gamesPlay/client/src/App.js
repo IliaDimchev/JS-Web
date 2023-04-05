@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import { AuthContext } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 import { gameServiceFactory } from './services/gameService';
-import { authServiceFactory } from './services/authService';
 
 import { Catalog } from "./components/Catalog/Catalog";
 import { CreateGame } from "./components/CreateGame/CreateGame";
@@ -21,10 +20,8 @@ export const deletedGame = false;
 function App() {
     const navigate = useNavigate();
     const [games, setGames] = useState([]);
-    const [auth, setAuth] = useState({});
     const [deletedGame, setDeletedGame] = useState({});
-    const gameService = gameServiceFactory(auth.accessToken);
-    const authService = authServiceFactory(auth.accessToken);
+    const gameService = gameServiceFactory(); // Add access token
 
     useEffect(() => {
         gameService.getAll()
@@ -41,61 +38,16 @@ function App() {
         navigate('/catalog');
     };
 
-    const onLoginSubmit = async (data) => {
-        try {
-            const result = await authService.login(data);
-
-            setAuth(result);
-
-            navigate('/catalog');
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const onRegisterSubmit = async (values) => {
-        const { confirmPassword, ...registerData } = values;
-        if (confirmPassword !== registerData.password) {
-            return;
-        };
-
-        try {
-            const result = await authService.register(registerData);
-
-            setAuth(result);
-
-            navigate('/catalog');
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const onLogout = async () => {
-        await authService.logout();
-
-        setAuth({});
-    };
-
     const onGameEditSubmit = async (values) => {
         const result = await gameService.edit(values._id, values);
 
-        //TODO Change State!!!
+        setGames(state => state.map(x => x._id === values._id ? result : x));
 
         navigate(`/catalog/${values._id}`);
     };
 
-    const context = {
-        onLoginSubmit,
-        onRegisterSubmit,
-        onLogout,
-        userId: auth._id,
-        token: auth.accessToken,
-        userEmail: auth.email,
-        isAuthenticated: !!auth.accessToken,
-    };
-
     return (
-        <AuthContext.Provider value={context}>
+        <AuthProvider>
             <div id="box">
                 <Header />
 
@@ -114,7 +66,7 @@ function App() {
 
                 <Footer />
             </div>
-        </AuthContext.Provider>
+        </AuthProvider>
     );
 }
 

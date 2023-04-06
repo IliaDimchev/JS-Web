@@ -35,15 +35,15 @@ export const GameDetails = ({
     const onCommentSubmit = async (e) => {
         e.preventDefault();
 
-        const result = await gameService.addComment(gameId, {
-            username,
-            comment
-        });
+        // const result = await gameService.addComment(gameId, {
+        //     username,
+        //     comment
+        // });
 
-        setGame(state => ({ ...state, comments: { ...state.comments, [result._id]: result } }));
+        // setGame(state => ({ ...state, comments: { ...state.comments, [result._id]: result } }));
 
-        setUsername('');
-        setComment('');
+        // setUsername('');
+        // setComment('');
     };
 
     const isOwner = game._ownerId === userId;

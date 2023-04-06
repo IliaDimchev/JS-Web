@@ -13,7 +13,7 @@ export const GameDetails = ({
     setDeletedGame,
 }) => {
     const { gameId } = useParams();
-    const { userId, isAuthenticated } = useAuthContext();
+    const { userId, isAuthenticated, email } = useAuthContext();
     const [game, setGame] = useState({});
     const gameService = useService(gameServiceFactory);
     const commentService = useService(commentServiceFactory);
@@ -44,7 +44,15 @@ export const GameDetails = ({
 
         setGame(state => ({
             ...state,
-            comments: [...state.comments, response]
+            comments: [
+                ...state.comments, 
+                {
+                    ...response,
+                    author: {
+                        email,
+                    }
+                }
+            ]
         }));
     };
 
@@ -79,13 +87,13 @@ export const GameDetails = ({
                     <ul>
                         {game.comments && game.comments.map(comment => (
                             <li key={comment._id} className="comment">
-                                <p>{comment.comment}</p>
+                                <p>{comment.author.email}: {comment.comment}</p>
                             </li>
                         ))}
                     </ul>
-                    {/* {!Object.values(game.comments).length && (
+                    {!game.comments?.length && (
                         <p className="no-comment">No comments.</p>
-                    )} */}
+                    )}
                 </div>
 
                 {isOwner && (

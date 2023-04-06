@@ -20,19 +20,32 @@ export const GameDetails = ({
     const navigate = useNavigate();
 
     useEffect(() => {
-        gameService.getOne(gameId)
-            .then(result => {
-                setGame(result);
-                // return commentSevice.getAll(gameId);
-            })
-        // .then(result => {
-        //     setCommnets(result);
-        // });
+        Promise.all([
+            gameService.getOne(gameId),
+            commentService.getAll(gameId),
+        ]).then(([gameData, comments]) => {
+                setGame({
+                    ...gameData,
+                    comments,
+                });
+            });
+        // gameService.getOne(gameId)
+        //     .then(result => {
+        //         setGame(result);
+        //         // return commentSevice.getAll(gameId);
+        //     })
+        // // .then(result => {
+        // //     setCommnets(result);
+        // // });
     }, [gameId]);
 
     const onCommentSubmit = async (values) => {
         const response = await commentService.create(gameId, values.comment);
-        console.log(response);
+
+        setGame(state => ({
+            ...state,
+            comments: [...state.comments, response]
+        }));
     };
 
     const isOwner = game._ownerId === userId;
@@ -64,9 +77,9 @@ export const GameDetails = ({
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
-                        {game.comments && Object.values(game.comments).map(comment => (
+                        {game.comments && game.comments.map(comment => (
                             <li key={comment._id} className="comment">
-                                <p>{comment.username}: {comment.comment}</p>
+                                <p>{comment.comment}</p>
                             </li>
                         ))}
                     </ul>

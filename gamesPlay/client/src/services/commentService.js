@@ -1,9 +1,9 @@
 import { requestFactory } from './requester';
 
-const baseUrl = 'http://localhost:3030/data/comments'
+const baseUrl = 'http://localhost:3030/data/comments';
+const request = requestFactory();
 
 export const commentServiceFactory = (token) => {
-    const request = requestFactory(token);
 
     const getAll = async (gameId) => {
         const query = encodeURIComponent(`gameId="${gameId}"`);
@@ -14,8 +14,8 @@ export const commentServiceFactory = (token) => {
         return comments;
     };
 
-    const create = async (data) => {
-        const result = await request.post(baseUrl, data);
+    const create = async (gameId, comment) => {
+        const result = await request.post(baseUrl, { gameId, comment });
 
         return result;
     };

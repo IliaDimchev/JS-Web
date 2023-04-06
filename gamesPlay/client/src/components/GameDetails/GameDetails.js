@@ -13,7 +13,7 @@ export const GameDetails = ({
     setDeletedGame,
 }) => {
     const { gameId } = useParams();
-    const { userId, isAuthenticated, email } = useAuthContext();
+    const { userId, isAuthenticated, userEmail } = useAuthContext();
     const [game, setGame] = useState({});
     const gameService = useService(gameServiceFactory);
     const commentService = useService(commentServiceFactory);
@@ -49,7 +49,7 @@ export const GameDetails = ({
                 {
                     ...response,
                     author: {
-                        email,
+                        email: userEmail,
                     }
                 }
             ]

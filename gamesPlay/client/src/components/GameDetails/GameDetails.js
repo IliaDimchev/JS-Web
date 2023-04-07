@@ -13,7 +13,7 @@ import { useGameContext } from '../../contexts/GameContext';
 export const GameDetails = () => {
     const { gameId } = useParams();
     const { userId, isAuthenticated, userEmail } = useAuthContext();
-    const {setDeletedGame} = useGameContext();
+    const { deletedGame } = useGameContext();
     const [game, dispatch] = useReducer(gameReducer, {});
     const gameService = useService(gameServiceFactory);
     const commentService = useService(commentServiceFactory);
@@ -24,12 +24,12 @@ export const GameDetails = () => {
             gameService.getOne(gameId),
             commentService.getAll(gameId),
         ]).then(([gameData, comments]) => {
-                const gameState = {
-                    ...gameData,
-                    comments,
-                }
-                dispatch({type: 'GAME_FETCH', payload: gameState})
-            });
+            const gameState = {
+                ...gameData,
+                comments,
+            }
+            dispatch({ type: 'GAME_FETCH', payload: gameState })
+        });
         // gameService.getOne(gameId)
         //     .then(result => {
         //         setGame(result);
@@ -53,11 +53,17 @@ export const GameDetails = () => {
     const isOwner = game._ownerId === userId;
 
     const onDeleteClick = async () => {
-        await gameService.delete(game._id);
+        // eslint-disable-next-line
+        const result = confirm(`The game ${game.title} is about to be deleted!`)
+        if (result) {
+            await gameService.delete(game._id);
 
-        setDeletedGame(game);
+            deletedGame(game._id);
 
-        navigate('/catalog');
+            navigate('/catalog');
+        };
+
+
     };
 
     return (

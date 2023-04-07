@@ -11,14 +11,13 @@ export const GameProvider = ({
     const navigate = useNavigate();
     const [games, setGames] = useState([]);
     const gameService = gameServiceFactory();
-    const [deletedGame, setDeletedGame] = useState({});
 
     useEffect(() => {
         gameService.getAll()
             .then(result => {
                 setGames(result);
             });
-    }, [deletedGame]);
+    }, []);
 
     const onCreateGameSubmit = async (data) => {
         const newGame = await gameService.create(data);
@@ -36,6 +35,10 @@ export const GameProvider = ({
         navigate(`/catalog/${values._id}`);
     };
 
+    const deleteGame = (gameId) => {
+        setGames(state => state.filter(game => game._id !== gameId));
+    };
+
     const getGame = (gameId) => {
         return games.find(game => game._id === gameId);
     };
@@ -44,7 +47,7 @@ export const GameProvider = ({
         games,
         onCreateGameSubmit,
         onGameEditSubmit,
-        setDeletedGame,
+        deleteGame,
         getGame,
     }
 

@@ -59,7 +59,11 @@ function App() {
                         <Route path='/' element={<Home />} />
                         <Route path='/catalog' element={<Catalog games={games} />} />
                         <Route path='/catalog/:gameId' element={<GameDetails setDeletedGame={setDeletedGame} />} />
-                        <Route path='/catalog/:gameId/edit' element={<Edit onGameEditSubmit={onGameEditSubmit} />} />
+
+                        <Route element={<RouteGuard />}>
+                            <Route path='/catalog/:gameId/edit' element={<Edit onGameEditSubmit={onGameEditSubmit} />} />
+                        </Route>
+
                         <Route path='/create-game' element={
                             <RouteGuard>
                                 <CreateGame onCreateGameSubmit={onCreateGameSubmit} />

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { useForm } from "../../hooks/useForm";
 import { useService } from "../../hooks/useService";
@@ -27,10 +27,6 @@ export const Edit = () => {
                 changeValues(result);
             });
     }, [gameId]);
-
-    if (values.ownerId !== userId) {
-        return <Navigate to={`/catalog/${gameId}`} replace />
-    }
 
     return (
         <section id="edit-page" className="auth">

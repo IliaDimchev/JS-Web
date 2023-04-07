@@ -15,6 +15,7 @@ import { Register } from "./components/Register/Register";
 import { Logout } from './components/Logout/Logout';
 import { RouteGuard } from './components/common/RouteGuard';
 import { SessionGuard } from './components/common/SessionGuard';
+import { GameOwner } from './components/common/GameOwner';
 
 function App() {
 
@@ -31,7 +32,11 @@ function App() {
                             <Route path='/catalog/:gameId' element={<GameDetails />} />
 
                             <Route element={<RouteGuard />}>
-                                <Route path='/catalog/:gameId/edit' element={<Edit />} />
+                                <Route path='/catalog/:gameId/edit' element={
+                                <GameOwner>
+                                    <Edit />
+                                </GameOwner>
+                                } />
                             </Route>
 
                             <Route path='/create-game' element={

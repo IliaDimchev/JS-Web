@@ -14,7 +14,7 @@ export const GameOwner = ({
     console.log(currentGame);
     console.log(gameId);
 
-    if (currentGame._ownerId !== userId) {
+    if (currentGame && currentGame._ownerId !== userId) {
         return <Navigate to={`/catalog/${gameId}`} replace />
     };
 

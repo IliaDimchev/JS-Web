@@ -30,7 +30,7 @@ export const GameDetails = ({
                     ...gameData,
                     comments,
                 }
-                dispatch({type: 'GAME_FETCH', game: gameState})
+                dispatch({type: 'GAME_FETCH', payload: gameState})
             });
         // gameService.getOne(gameId)
         //     .then(result => {

@@ -44,6 +44,7 @@ export const GameProvider = ({
         games,
         onCreateGameSubmit,
         onGameEditSubmit,
+        setDeletedGame,
         getGame,
     }
 

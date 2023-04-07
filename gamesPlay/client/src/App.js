@@ -15,6 +15,8 @@ import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
 import { Logout } from './components/Logout/Logout';
 import { RouteGuard } from './components/common/RouteGuard';
+import { SessionGuard } from './components/common/SessionGuard';
+
 
 export const deletedGame = false;
 
@@ -61,11 +63,19 @@ function App() {
                         <Route path='/create-game' element={
                             <RouteGuard>
                                 <CreateGame onCreateGameSubmit={onCreateGameSubmit} />
-                            </RouteGuard>    
+                            </RouteGuard>
                         } />
-                        <Route path='/login' element={<Login />} />
+                        <Route path='/login' element={
+                            <SessionGuard>
+                                <Login />
+                            </SessionGuard>
+                        } />
+                        <Route path='/register' element={
+                            <SessionGuard>
+                                <Register />
+                            </SessionGuard>
+                        } />
                         <Route path='/logout' element={<Logout />} />
-                        <Route path='/register' element={<Register />} />
                     </Routes>
                 </main>
 

@@ -14,6 +14,7 @@ import { Home } from "./components/Home/Home";
 import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
 import { Logout } from './components/Logout/Logout';
+import { RouteGuard } from './components/common/RouteGuard';
 
 export const deletedGame = false;
 
@@ -21,7 +22,7 @@ function App() {
     const navigate = useNavigate();
     const [games, setGames] = useState([]);
     const [deletedGame, setDeletedGame] = useState({});
-    const gameService = gameServiceFactory(); // Add access token
+    const gameService = gameServiceFactory(); // Add acc /e
 
     useEffect(() => {
         gameService.getAll()
@@ -53,14 +54,18 @@ function App() {
 
                 <main id="main-content">
                     <Routes>
-                        <Route path='/' element={<Home />}></Route>
-                        <Route path='/catalog' element={<Catalog games={games} />}></Route>
-                        <Route path='/catalog/:gameId' element={<GameDetails setDeletedGame={setDeletedGame} />}></Route>
-                        <Route path='/catalog/:gameId/edit' element={<Edit onGameEditSubmit={onGameEditSubmit} />}></Route>
-                        <Route path='/create-game' element={<CreateGame onCreateGameSubmit={onCreateGameSubmit} />}></Route>
-                        <Route path='/login' element={<Login />}></Route>
-                        <Route path='/logout' element={<Logout />}></Route>
-                        <Route path='/register' element={<Register />}></Route>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/catalog' element={<Catalog games={games} />} />
+                        <Route path='/catalog/:gameId' element={<GameDetails setDeletedGame={setDeletedGame} />} />
+                        <Route path='/catalog/:gameId/edit' element={<Edit onGameEditSubmit={onGameEditSubmit} />} />
+                        <Route path='/create-game' element={
+                            <RouteGuard>
+                                <CreateGame onCreateGameSubmit={onCreateGameSubmit} />
+                            </RouteGuard>    
+                        } />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/logout' element={<Logout />} />
+                        <Route path='/register' element={<Register />} />
                     </Routes>
                 </main>
 

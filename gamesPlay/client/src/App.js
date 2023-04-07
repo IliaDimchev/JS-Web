@@ -16,9 +16,6 @@ import { Logout } from './components/Logout/Logout';
 import { RouteGuard } from './components/common/RouteGuard';
 import { SessionGuard } from './components/common/SessionGuard';
 
-
-export const deletedGame = false;
-
 function App() {
 
     return (

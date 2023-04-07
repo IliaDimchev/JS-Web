@@ -1,14 +1,16 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 
 import { useForm } from "../../hooks/useForm";
 import { useService } from "../../hooks/useService";
 import { gameServiceFactory } from "../../services/gameService";
 import { useGameContext } from "../../contexts/GameContext";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 export const Edit = () => {
     const { onGameEditSubmit } = useGameContext();
     const { gameId } = useParams();
+    const { userId } = useAuthContext();
     const gameService = useService(gameServiceFactory);
     const { values, changeHandler, onSubmit, changeValues } = useForm({
         _id: '',
@@ -25,6 +27,10 @@ export const Edit = () => {
                 changeValues(result);
             });
     }, [gameId]);
+
+    if (values.ownerId !== userId) {
+        return <Navigate to={`/catalog/${gameId}`} replace />
+    }
 
     return (
         <section id="edit-page" className="auth">

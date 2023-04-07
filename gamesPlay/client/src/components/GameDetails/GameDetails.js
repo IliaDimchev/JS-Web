@@ -8,14 +8,12 @@ import { useAuthContext } from '../../contexts/AuthContext';
 
 import { AddComment } from './AddComment/AddComment';
 import { gameReducer } from '../../reducers/gameReducer';
+import { useGameContext } from '../../contexts/GameContext';
 
-
-
-export const GameDetails = ({
-    setDeletedGame,
-}) => {
+export const GameDetails = () => {
     const { gameId } = useParams();
     const { userId, isAuthenticated, userEmail } = useAuthContext();
+    const {setDeletedGame} = useGameContext();
     const [game, dispatch] = useReducer(gameReducer, {});
     const gameService = useService(gameServiceFactory);
     const commentService = useService(commentServiceFactory);

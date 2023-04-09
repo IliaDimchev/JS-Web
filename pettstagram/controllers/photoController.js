@@ -34,6 +34,7 @@ router.get('/catalog/:photoId/details', async (req, res) => {
     const isOwner = photo.owner._id == req.user?._id;
     const canComment = req.user?._id != photo.owner._id
     const comments = photo.commentList;
+    console.log(photo)
 
     res.render('photo/details', { photo, isOwner, canComment, comments });
 });
@@ -53,6 +54,7 @@ router.get('/catalog/:photoId/edit', isAuthorized, async (req, res) => {
 
     const photo = await photoService.getOne(req.params.photoId).populate('owner');
     if (req.user?._id == photo.owner._id.toString()) {
+
         res.render('photo/edit', { photo });
     } else {
         res.redirect('/');
